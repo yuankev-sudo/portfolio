@@ -112,13 +112,26 @@ function renderSection(section) {
             html += `<section class="image-gallery">`;
             
             html += `<div class="gallery-${section.layout}">`;
-            section.images.forEach(img => {
-                html += `
-                    <figure class="gallery-image">
-                        <img src="${img.src}" alt="${img.alt}">
-                        <figcaption>${img.caption}</figcaption>
-                    </figure>
-                `;
+            section.images.forEach(item => {
+                if (item.type === 'video') {
+                    // Render video in gallery
+                    html += `
+                        <figure class="gallery-image">
+                            <video controls playsinline muted loop>
+                                <source src="${item.src}" type="video/${item.format || 'mp4'}">
+                            </video>
+                            <figcaption>${item.caption}</figcaption>
+                        </figure>
+                    `;
+                } else {
+                    // Render image in gallery
+                    html += `
+                        <figure class="gallery-image">
+                            <img src="${item.src}" alt="${item.alt}">
+                            <figcaption>${item.caption}</figcaption>
+                        </figure>
+                    `;
+                }
             });
             html += `</div>`;
             

@@ -162,43 +162,47 @@
           ]
         },
         {
-          "type": "learnings",
-          "heading": "Key Learnings",
-          "content": "What did you learn from this project? What would you improve if you had more time? What mistakes did you make and how did you overcome them?"
+          "type": "overview",
+          "heading": "Additional Images",
+          "content": ""
         },
         {
           "type": "gallery",
           "layout": "grid-3",
           "images": [
             {
-              "src": "images/Nupeak/gallery-1.jpg",
+              "src": "images/Nupeak/NupeakInject.png",
               "alt": "Development process",
-              "caption": "Early prototyping and testing phase"
+              "caption": "CAN + PWR Injector Board"
             },
             {
-              "src": "images/Nupeak/gallery-2.jpg",
+              "src": "images/Nupeak/fab.jpeg",
               "alt": "Component selection",
-              "caption": "Components evaluated during the design process"
+              "caption": "Fabricating PCBs using Stencile"
             },
             {
-              "src": "images/Nupeak/gallery-3.jpg",
+              "src": "images/Nupeak/fab2.jpeg",
               "alt": "Debugging session",
-              "caption": "Debugging with oscilloscope and logic analyzer"
+              "caption": "Finished Assembled LED PCBs"
             },
             {
-              "src": "images/Nupeak/gallery-4.jpg",
+              "src": "images/Nupeak/test.jpeg",
               "alt": "PCB manufacturing",
-              "caption": "PCBs received from manufacturer, ready for assembly"
+              "caption": "Testing LED RGB Command"
             },
             {
-              "src": "images/Nupeak/gallery-5.jpg",
+              "type": "video",
+              "src": "images/Nupeak/mov1.MOV",
+              "format": "mp4",
               "alt": "Field testing",
-              "caption": "Field testing in real-world conditions"
+              "caption": "Testing LVGL Graphics Export"
             },
             {
-              "src": "images/Nupeak/gallery-6.jpg",
+              "type": "video",
+              "src": "images/Nupeak/mov2.MOV",
+              "format": "mp4",
               "alt": "Final deployment",
-              "caption": "System deployed and operational in production"
+              "caption": "Testing ROS Serial"
             }
           ]
         }
@@ -208,26 +212,96 @@
       "id": "system-on-module",
       "number": "02",
       "title": "System-on-Module",
-      "subtitle": "High-performance computing module for edge AI applications",
-      "description": "Real-time motor control system using STM32F4 with field-oriented control. Precise position and velocity control for robotics applications with 20kHz control loops.",
-      "thumbnail": "images/SoM.png",
+      "subtitle": "System-on-Module for local motor control for quadruped project",
+      "description": "Compact motor control module using RP2350B for distributed actuation in quadruped robotics. Custom castellated edge design for board-to-board stacking with optimized signal integrity.",
+      "thumbnail": "images/Atombot/v3.png",
       "tags": [
-        "STM32",
-        "Motor Control",
-        "Real-time"
+        "RP2350B",
+        "KiCad"
       ],
       "meta": {
         "role": "Hardware Engineer",
-        "timeline": "4 months",
-        "teamSize": "2"
+        "timeline": "2 months",
+        "teamSize": "3"
       },
       "techTags": [
-        "STM32F4",
-        "FOC",
-        "C",
-        "FreeRTOS"
+        "RP2350B",
+        "KiCad"
       ],
-      "sections": []
+      "sections": [
+        {
+          "type": "overview",
+          "heading": "Overview",
+          "content": "Built a compact System-on-Module to control individual joint actuators in a quadruped robot. Each leg needed its own local controller to handle motor commands without overwhelming the main processor, so I designed this board around the RP2350B to sit right next to each actuator. Getting clean signals in an environment full of motor noise took several iterations, but the final design handles the electrical chaos of PWM motor drivers while keeping communication rock-solid."
+        },
+        {
+          "type": "gallery",
+          "layout": "side-by-side",
+          "images": [
+            {
+              "src": "images/Atombot/v1.png",
+              "alt": "System-on-Module V1",
+              "caption": "V1 — Initial SoM design with RP2350B, external crystal, and flash memory for program storage."
+            }
+          ]
+        },
+        {
+          "type": "problem",
+          "heading": "Problem & Constraints",
+          "content": "Twelve motors switching at high frequencies creates an electrical nightmare. The SoM had to fit in tight spaces near each joint while dealing with all that noise, plus handle high-speed communication between modules without dropping data. The mechanical team needed castellated edges for board-to-board stacking to save space. The approach was to keep the module dead simple — just the brain (RP2350B), its clock, and flash memory. All the power and motor control stuff stays on the main board. So the real challenge was keeping differential signals clean, making sure the crystal circuit was stable, and designing custom castellated edges that could handle repeated assembly cycles."
+        },
+        {
+          "type": "overview",
+          "heading": "Technical Approach",
+          "content": "Signal integrity was the main battle here. I routed all high-speed differential pairs with matched lengths and controlled impedance — if the timing's off even slightly, you get data corruption. Scattered vias everywhere for ground plane stitching to give return currents a clean path back and cut down on EMI. Kept power and ground planes separate so digital noise wouldn't couple into anything sensitive. The castellated edges were initially through hole pin headers, but in V2 I decided to design a custom one since I couldn't find a footprint that worked for our stacking scheme. The design is intentionally minimal — just the RP2350B, a crystal for stable clocking, and external flash for program storage. Everything else (power regulation, motor drivers) lives on the main board that this module plugs into."
+        },
+        {
+          "type": "gallery",
+          "layout": "grid-2",
+          "images": [
+            {
+              "src": "images/Atombot/v1.1.png",
+              "alt": "SoM V2",
+              "caption": "V2 — Added castellated edges for board-to-board stacking"
+            },
+            {
+              "src": "images/Atombot/v2.png",
+              "alt": "SoM V3",
+              "caption": "V3 — Design with optimized signal integrity and custom castellated footprint"
+            }
+          ]
+        },
+        {
+          "type": "results",
+          "heading": "Results & Impact",
+          "content": "",
+          "metrics": [
+            {
+              "value": "4",
+              "label": "Design Iterations"
+            },
+            {
+              "value": "4",
+              "label": "Modules Per Robot"
+            },
+            {
+              "value": "100%",
+              "label": "First Assembly Success"
+            }
+          ]
+        },
+        {
+          "type": "gallery",
+          "layout": "side-by-side",
+          "images": [
+            {
+              "src": "images/Atombot/v3.png",
+              "alt": "Assembled module",
+              "caption": "Final SoM board with improved component orientation and castellated edges"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "wearable-health-tracker",
@@ -252,7 +326,162 @@
         "Flex PCB",
         "Power Management"
       ],
-      "sections": []
+      "sections": [
+        {
+          "type": "overview",
+          "heading": "Overview",
+          "content": "Designed and developed an ultra-low-power wearable health tracker featuring continuous heart rate monitoring, activity tracking, and Bluetooth Low Energy connectivity. The device utilizes a flexible PCB to conform to wrist contours, integrating the nRF52832 SoC with optimized power management to achieve over 14 days of battery life. The project encompassed hardware design, firmware development, and mobile app integration for real-time biometric data visualization."
+        },
+        {
+          "type": "gallery",
+          "layout": "side-by-side",
+          "images": [
+            {
+              "src": "images/Wearable/flex-pcb-v1.png",
+              "alt": "Flex PCB Design",
+              "caption": "V1 — Flexible PCB layout optimized for wrist-worn form factor with nRF52832, PPG sensor, and accelerometer."
+            }
+          ]
+        },
+        {
+          "type": "problem",
+          "heading": "Problem & Constraints",
+          "content": "Wearable devices face unique engineering challenges: extreme power constraints requiring operation on a small battery for weeks, mechanical flexibility to fit curved surfaces while maintaining electrical reliability, and accurate biometric sensing despite motion artifacts and varying skin contact. The design needed to balance sensor performance with power consumption, maintain BLE connectivity range, fit within a compact wearable form factor, and ensure robust operation through daily wear including water exposure and physical impacts."
+        },
+        {
+          "type": "overview",
+          "heading": "Hardware Design",
+          "content": "The flex PCB design uses a multi-layer stackup with rigid sections for components and flexible interconnects for articulation. The nRF52832 was selected for its integrated BLE radio and ultra-low-power modes. Power management employs a buck converter for efficient battery regulation, with aggressive sleep modes reducing average current to under 50µA. The PPG sensor module features optimized LED drive circuitry and transimpedance amplifier for heart rate detection. An accelerometer enables motion tracking and gesture recognition while serving as a wake source. Strategic component placement minimizes flex zone stress and maintains signal integrity."
+        },
+        {
+          "type": "gallery",
+          "layout": "grid-3",
+          "images": [
+            {
+              "src": "images/Wearable/power-tree.png",
+              "alt": "Power architecture",
+              "caption": "Ultra-low-power architecture with multiple sleep modes"
+            },
+            {
+              "src": "images/Wearable/sensor-circuit.png",
+              "alt": "Biometric sensors",
+              "caption": "PPG heart rate sensor and accelerometer interface circuits"
+            },
+            {
+              "src": "images/Wearable/flex-layers.png",
+              "alt": "Flex PCB stackup",
+              "caption": "Multi-layer flexible PCB design with rigid-flex transitions"
+            }
+          ]
+        },
+        {
+          "type": "full-width-image",
+          "src": "images/Wearable/assembled-device.jpeg",
+          "alt": "Assembled wearable",
+          "caption": "Fully assembled wearable device with flex PCB in final enclosure"
+        },
+        {
+          "type": "overview",
+          "heading": "Firmware & Algorithms",
+          "content": "The firmware architecture implements a state machine managing sensor sampling, data processing, and BLE communication. Heart rate detection uses a PPG signal processing pipeline with adaptive filtering, peak detection, and artifact rejection algorithms. A complementary filter fuses accelerometer data for step counting and activity classification. The BLE stack operates in peripheral mode, advertising health data using standard GATT profiles. Deep sleep modes are leveraged between sensor readings, with the RTC waking the system at configured intervals. Flash memory stores historical data for later synchronization when disconnected from the mobile app."
+        },
+        {
+          "type": "gallery",
+          "layout": "grid-2",
+          "images": [
+            {
+              "src": "images/Wearable/signal-processing.png",
+              "alt": "PPG processing",
+              "caption": "Heart rate signal processing and peak detection algorithm"
+            },
+            {
+              "src": "images/Wearable/app-interface.png",
+              "alt": "Mobile app",
+              "caption": "Mobile app interface displaying real-time biometric data"
+            }
+          ]
+        },
+        {
+          "type": "results",
+          "heading": "Results & Impact",
+          "content": "",
+          "metrics": [
+            {
+              "value": "14+ days",
+              "label": "Battery life"
+            },
+            {
+              "value": "±2 BPM",
+              "label": "Heart rate accuracy"
+            },
+            {
+              "value": "<50µA",
+              "label": "Average current draw"
+            }
+          ]
+        },
+        {
+          "type": "gallery",
+          "layout": "grid-2",
+          "images": [
+            {
+              "src": "images/Wearable/validation-setup.png",
+              "alt": "Validation testing",
+              "caption": "Heart rate accuracy validation against reference equipment"
+            },
+            {
+              "src": "images/Wearable/user-testing.png",
+              "alt": "User testing",
+              "caption": "Field testing with users in various activity scenarios"
+            }
+          ]
+        },
+        {
+          "type": "overview",
+          "heading": "Additional Images",
+          "content": ""
+        },
+        {
+          "type": "gallery",
+          "layout": "grid-3",
+          "images": [
+            {
+              "src": "images/Wearable/prototype-assembly.jpeg",
+              "alt": "Prototype assembly",
+              "caption": "Early prototype with test points and debug interfaces"
+            },
+            {
+              "src": "images/Wearable/flex-bending.jpeg",
+              "alt": "Flex testing",
+              "caption": "Mechanical flex testing and bend radius validation"
+            },
+            {
+              "src": "images/Wearable/power-measurement.jpeg",
+              "alt": "Power profiling",
+              "caption": "Current consumption measurement across different modes"
+            },
+            {
+              "src": "images/Wearable/enclosure-fit.jpeg",
+              "alt": "Enclosure integration",
+              "caption": "PCB integration into wearable enclosure design"
+            },
+            {
+              "type": "video",
+              "src": "images/Wearable/heart-rate-demo.mp4",
+              "format": "mp4",
+              "alt": "Heart rate monitoring",
+              "caption": "Real-time heart rate detection and BLE streaming"
+            },
+            {
+              "type": "video",
+              "src": "images/Wearable/activity-tracking.mp4",
+              "format": "mp4",
+              "alt": "Activity tracking",
+              "caption": "Step counting and activity recognition demonstration"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
