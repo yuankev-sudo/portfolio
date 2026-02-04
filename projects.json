@@ -304,182 +304,189 @@
       ]
     },
     {
-      "id": "wearable-health-tracker",
+      "id": "d-stock-telemetry",
       "number": "03",
-      "title": "Wearable Health Tracker",
-      "subtitle": "Ultra-low-power biometric monitoring device",
-      "description": "Ultra-low-power wearable with flex PCB. Heart rate monitoring, activity tracking, and BLE connectivity achieving 14+ days battery life in a compact form factor.",
-      "thumbnail": "",
+      "title": "D-Stock Racing Telemetry System",
+      "subtitle": "Led cockpit board design and contributed to telemetry system for high-speed marine racing application",
+      "description": "Led cockpit board design in Altium using STM32F4 for high-speed D-Stock boat racing. Rigid-flex PCB with multi-rail power management (48V-3.3V) and complete HV/LV isolation. Contributed to telemetry board with GPS and CAN bus.",
+      "thumbnail": "images/dstock/v3-assembled.jpg",
       "tags": [
-        "nRF52",
-        "BLE",
-        "Flex PCB"
+        "STM32F4",
+        "Rigid-Flex PCB",
+        "Altium",
+        "Iso CAN"
       ],
       "meta": {
-        "role": "Embedded Engineer",
+        "role": "Computing Hardware Lead",
         "timeline": "5 months",
         "teamSize": "3"
       },
       "techTags": [
-        "nRF52832",
-        "Bluetooth 5.0",
-        "Flex PCB",
-        "Power Management"
+        "Altium Designer",
+        "STM32F4",
+        "Iso CAN",
+        "Antenna",
+        "SD Card"
       ],
       "sections": [
         {
           "type": "overview",
           "heading": "Overview",
-          "content": "Designed and developed an ultra-low-power wearable health tracker featuring continuous heart rate monitoring, activity tracking, and Bluetooth Low Energy connectivity. The device utilizes a flexible PCB to conform to wrist contours, integrating the nRF52832 SoC with optimized power management to achieve over 14 days of battery life. The project encompassed hardware design, firmware development, and mobile app integration for real-time biometric data visualization."
+          "content": "Led the complete design of the cockpit board and contributed to the telemetry board for high-speed D-Stock boat racing applications. The cockpit system features a rigid-flex PCB with multi-rail power management (48V to 3.3V), while the telemetry board provides GPS tracking and CAN bus communication. Through three design iterations on the cockpit board, the system evolved from a basic two-board design to a highly integrated rigid-flex solution with complete high-voltage/low-voltage isolation and enhanced signal integrity."
+        },
+        {
+          "type": "problem",
+          "heading": "Problem & Constraints",
+          "content": "High-speed boat racing demands extreme reliability in harsh conditions including constant vibration, water exposure, and electrical noise from high-power motors. The cockpit system needed to manage 48V high-voltage inputs while providing clean 3.3V logic signals, all within a compact form factor that could withstand mechanical shock. Signal integrity was critical for GPS antenna routing and CAN bus communication, while the design had to maintain complete electrical isolation between high-voltage and low-voltage circuits to ensure safety and prevent ground loops."
+        },
+        {
+          "type": "technical",
+          "heading": "Technical Approach & Design Evolution",
+          "content": "The project evolved through three major iterations, each addressing specific challenges discovered through testing and real-world operation. Starting with a basic two-layer design, the system progressively improved in reliability, signal integrity, and manufacturing robustness.",
+          "subsections": [
+            {
+              "heading": "V1: Foundation Design",
+              "content": "The initial design established the core architecture with SD card logging using pull-up resistors for SPI communication, M12 connectors for high reliability and voltage rating in marine environments, comprehensive test points for debugging, CAN transceiver with basic signal integrity measures, fundamental HV/LV separation on the same board, DPDT relay for HV contactor control, backup SPDTs for digital switching redundancy, and Boot option paired with RST button for programming flexibility."
+            }
+          ]
         },
         {
           "type": "gallery",
           "layout": "side-by-side",
           "images": [
             {
-              "src": "images/Wearable/flex-pcb-v1.png",
-              "alt": "Flex PCB Design",
-              "caption": "V1 — Flexible PCB layout optimized for wrist-worn form factor with nRF52832, PPG sensor, and accelerometer."
+              "src": "images/dstock/v1-pcb.jpg",
+              "alt": "Version 1 PCB",
+              "caption": "V1: Initial two-layer design with basic HV/LV separation, M12 connectors, and DPDT relay for HV contactor control"
             }
           ]
         },
         {
-          "type": "problem",
-          "heading": "Problem & Constraints",
-          "content": "Wearable devices face unique engineering challenges: extreme power constraints requiring operation on a small battery for weeks, mechanical flexibility to fit curved surfaces while maintaining electrical reliability, and accurate biometric sensing despite motion artifacts and varying skin contact. The design needed to balance sensor performance with power consumption, maintain BLE connectivity range, fit within a compact wearable form factor, and ensure robust operation through daily wear including water exposure and physical impacts."
-        },
-        {
-          "type": "overview",
-          "heading": "Hardware Design",
-          "content": "The flex PCB design uses a multi-layer stackup with rigid sections for components and flexible interconnects for articulation. The nRF52832 was selected for its integrated BLE radio and ultra-low-power modes. Power management employs a buck converter for efficient battery regulation, with aggressive sleep modes reducing average current to under 50µA. The PPG sensor module features optimized LED drive circuitry and transimpedance amplifier for heart rate detection. An accelerometer enables motion tracking and gesture recognition while serving as a wake source. Strategic component placement minimizes flex zone stress and maintains signal integrity."
-        },
-        {
-          "type": "gallery",
-          "layout": "grid-3",
-          "images": [
+          "type": "technical",
+          "heading": "V2: Signal Integrity & Separation",
+          "content": "",
+          "subsections": [
             {
-              "src": "images/Wearable/power-tree.png",
-              "alt": "Power architecture",
-              "caption": "Ultra-low-power architecture with multiple sleep modes"
-            },
-            {
-              "src": "images/Wearable/sensor-circuit.png",
-              "alt": "Biometric sensors",
-              "caption": "PPG heart rate sensor and accelerometer interface circuits"
-            },
-            {
-              "src": "images/Wearable/flex-layers.png",
-              "alt": "Flex PCB stackup",
-              "caption": "Multi-layer flexible PCB design with rigid-flex transitions"
+              "heading": "Key Improvements",
+              "content": "Version 2 introduced significant improvements including SD card buffer for enhanced signal integrity and drive strength, external resistor for crystal oscillator to limit current and improve stability, complete HV/LV separation using stacked boards for superior isolation and better size constraints, FFC (Flexible Flat Cable) connectors for inter-board communication, simplified programming interface with SWD and Boot0 elimination (RST button only), and buffered SD card signals for improved reliability at higher speeds."
             }
           ]
-        },
-        {
-          "type": "full-width-image",
-          "src": "images/Wearable/assembled-device.jpeg",
-          "alt": "Assembled wearable",
-          "caption": "Fully assembled wearable device with flex PCB in final enclosure"
-        },
-        {
-          "type": "overview",
-          "heading": "Firmware & Algorithms",
-          "content": "The firmware architecture implements a state machine managing sensor sampling, data processing, and BLE communication. Heart rate detection uses a PPG signal processing pipeline with adaptive filtering, peak detection, and artifact rejection algorithms. A complementary filter fuses accelerometer data for step counting and activity classification. The BLE stack operates in peripheral mode, advertising health data using standard GATT profiles. Deep sleep modes are leveraged between sensor readings, with the RTC waking the system at configured intervals. Flash memory stores historical data for later synchronization when disconnected from the mobile app."
         },
         {
           "type": "gallery",
           "layout": "grid-2",
           "images": [
             {
-              "src": "images/Wearable/signal-processing.png",
-              "alt": "PPG processing",
-              "caption": "Heart rate signal processing and peak detection algorithm"
+              "src": "images/dstock/v2-pcb.jpg",
+              "alt": "Version 2 PCB",
+              "caption": "V2: Stacked board architecture with FFC connector for complete HV/LV separation"
             },
             {
-              "src": "images/Wearable/app-interface.png",
-              "alt": "Mobile app",
-              "caption": "Mobile app interface displaying real-time biometric data"
+              "src": "images/dstock/v2-assembled.jpg",
+              "alt": "V2 Assembled Board",
+              "caption": "V2 assembled and tested in lab environment"
+            }
+          ]
+        },
+        {
+          "type": "technical",
+          "heading": "V3: Rigid-Flex Integration",
+          "content": "",
+          "subsections": [
+            {
+              "heading": "Final Design Achievements",
+              "content": "The final iteration achieved professional-grade reliability through rigid-flex PCB construction eliminating two failure points from connectors while providing superior vibration resistance, complete galvanic isolation between HV and LV sections, 40% more compact footprint, enhanced CAN signal integrity through controlled impedance routing and proper termination, strategic ground plane cutouts under switching regulators to reduce EMI, backup SD card pin header for external reading during diagnostics, and BJT-based LED drivers to protect GPIO pins from overcurrent conditions."
+            }
+          ]
+        },
+        {
+          "type": "gallery",
+          "layout": "grid-2",
+          "images": [
+            {
+              "src": "images/dstock/v3-3d.jpg",
+              "alt": "V3 3D Rendering",
+              "caption": "3D model showing rigid-flex construction with integrated HV/LV isolation"
+            },
+            {
+              "src": "images/dstock/v3-assembled.jpg",
+              "alt": "V3 Assembled Board",
+              "caption": "V3 final production board with rigid-flex PCB - 40% more compact than V2"
+            }
+          ]
+        },
+        {
+          "type": "technical",
+          "heading": "Telemetry Board Design",
+          "content": "Collaborated on the telemetry board design, which required precise RF engineering for GPS functionality and robust industrial communication protocols. Contributed to critical signal integrity decisions for the RF and communication subsystems.",
+          "subsections": [
+            {
+              "heading": "GPS Antenna Routing",
+              "content": "Assisted in implementing controlled impedance routing (50Ω) for the GPS antenna trace using microstrip line calculations. The trace geometry was carefully calculated to maintain characteristic impedance matching between the GPS module and antenna connector, minimizing signal reflections and maximizing sensitivity. Load termination was added at the antenna end to prevent standing waves."
+            }
+          ]
+        },
+        {
+          "type": "gallery",
+          "layout": "side-by-side",
+          "images": [
+            {
+              "src": "images/dstock/impedance-calc.jpg",
+              "alt": "Impedance Matching Calculations",
+              "caption": "Microstrip impedance calculations for 50Ω GPS antenna trace routing using PCB stackup parameters"
+            }
+          ]
+        },
+        {
+          "type": "technical",
+          "heading": "CAN Bus Signal Integrity",
+          "content": "",
+          "subsections": [
+            {
+              "heading": "Robust Communication Design",
+              "content": "Contributed to the design of differential CAN bus traces with impedance matching (120Ω differential) and optocoupler isolation to protect the microcontroller from ground potential differences and electrical transients. Strategic component placement kept CANL/CANH traces away from noisy switching power supplies and other interference sources. Bus termination with 120Ω resistor ensured proper signal integrity."
+            }
+          ]
+        },
+        {
+          "type": "gallery",
+          "layout": "side-by-side",
+          "images": [
+            {
+              "src": "images/dstock/telem-board.jpg",
+              "alt": "Telemetry Board",
+              "caption": "Telemetry board featuring GPS module with impedance-matched antenna trace and optocoupled CAN bus interface"
             }
           ]
         },
         {
           "type": "results",
-          "heading": "Results & Impact",
-          "content": "",
+          "heading": "Results & Key Improvements",
+          "content": "Through three design iterations, the system achieved production-ready reliability for demanding racing environments. Each version addressed specific failure modes and performance limitations discovered through rigorous testing.",
           "metrics": [
             {
-              "value": "14+ days",
-              "label": "Battery life"
+              "value": "3",
+              "label": "Design iterations"
             },
             {
-              "value": "±2 BPM",
-              "label": "Heart rate accuracy"
+              "value": "40%",
+              "label": "Size reduction (V3)"
             },
             {
-              "value": "<50µA",
-              "label": "Average current draw"
+              "value": "10+",
+              "label": "End users satisfied"
             }
           ]
         },
         {
-          "type": "gallery",
-          "layout": "grid-2",
-          "images": [
-            {
-              "src": "images/Wearable/validation-setup.png",
-              "alt": "Validation testing",
-              "caption": "Heart rate accuracy validation against reference equipment"
-            },
-            {
-              "src": "images/Wearable/user-testing.png",
-              "alt": "User testing",
-              "caption": "Field testing with users in various activity scenarios"
-            }
-          ]
+          "type": "learnings",
+          "heading": "Key Learnings",
+          "content": "This project reinforced the importance of iterative design in high-reliability applications. The transition from V1 to V2 taught me that physical separation of HV/LV circuits provides far better isolation than simple PCB layout techniques. Moving to rigid-flex in V3 demonstrated that investing in advanced manufacturing processes can eliminate entire categories of failure modes - the cost of rigid-flex was justified by removing connector failures in high-vibration environments. RF design requires meticulous attention to transmission line theory; the GPS antenna routing showed that even small impedance mismatches significantly degrade performance. Finally, strategic ground plane management around switching regulators proved essential for EMI reduction - the cutouts under inductors reduced radiated emissions measurably. If given more time, I would implement a fourth iteration with integrated power monitoring on each rail and add redundant SD card storage with automatic failover for critical race data logging."
         },
         {
           "type": "overview",
-          "heading": "Additional Images",
-          "content": ""
-        },
-        {
-          "type": "gallery",
-          "layout": "grid-3",
-          "images": [
-            {
-              "src": "images/Wearable/prototype-assembly.jpeg",
-              "alt": "Prototype assembly",
-              "caption": "Early prototype with test points and debug interfaces"
-            },
-            {
-              "src": "images/Wearable/flex-bending.jpeg",
-              "alt": "Flex testing",
-              "caption": "Mechanical flex testing and bend radius validation"
-            },
-            {
-              "src": "images/Wearable/power-measurement.jpeg",
-              "alt": "Power profiling",
-              "caption": "Current consumption measurement across different modes"
-            },
-            {
-              "src": "images/Wearable/enclosure-fit.jpeg",
-              "alt": "Enclosure integration",
-              "caption": "PCB integration into wearable enclosure design"
-            },
-            {
-              "type": "video",
-              "src": "images/Wearable/heart-rate-demo.mp4",
-              "format": "mp4",
-              "alt": "Heart rate monitoring",
-              "caption": "Real-time heart rate detection and BLE streaming"
-            },
-            {
-              "type": "video",
-              "src": "images/Wearable/activity-tracking.mp4",
-              "format": "mp4",
-              "alt": "Activity tracking",
-              "caption": "Step counting and activity recognition demonstration"
-            }
-          ]
+          "heading": "To Be Continued...",
+          "content": "The project is currently in the assembly and enclosure design phase. I'm designing a custom case to house the rigid-flex cockpit board and telemetry system, ensuring proper mechanical protection while maintaining access for debugging and field servicing. PCB assembly is underway with careful attention to component placement and soldering quality for the rigid-flex construction. Stay tuned for updates on the final integrated system and on-water testing results."
         }
       ]
     }
