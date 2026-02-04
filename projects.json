@@ -1,0 +1,258 @@
+{
+  "projects": [
+    {
+      "id": "imitation-learning-controller",
+      "number": "01",
+      "title": "Imitation Learning Tool",
+      "subtitle": "Design, fabricate and program a PCB to control and power an imitation learning data collecting tool",
+      "description": "Multi-interface platform with custom PCB design. Low-power RP2040 implementation featuring ROS Serial and custom interactive UI.",
+      "thumbnail": "images/Nupeak/Imitation Learning Controller.png",
+      "tags": [
+        "RP2040",
+        "KiCad",
+        "ROS Serial",
+        "Squareline Studio"
+      ],
+      "meta": {
+        "role": "Embedded Systems Intern",
+        "timeline": "3 months",
+        "teamSize": "Solo"
+      },
+      "techTags": [
+        "KiCad",
+        "RP2040",
+        "ROS Noetic",
+        "C#",
+        "Squareline Studio"
+      ],
+      "sections": [
+        {
+          "type": "overview",
+          "heading": "Overview",
+          "content": "During a summer internship at Nupeak Robotics after my freshman year, I designed and built a fully integrated robot training tool from the ground up — despite having no prior embedded systems experience. Over three months, I developed hands-on expertise in PCB design, UI integration, and firmware programming, ultimately delivering a ROS-enabled platform now used by the company to collect imitation learning data for training robot arms."
+        },
+        {
+          "type": "gallery",
+          "layout": "side-by-side",
+          "images": [
+            {
+              "src": "images/Nupeak/NupeakV1.png",
+              "alt": "V1 Main Controller PCB",
+              "caption": "V1 — designed from scratch in KiCad. Migrated to the RP2350B, added a BLDC motor controller, TFT display, and tactile buttons, with stepped-down power rails (12V → 3.3V / 5V)."
+            }
+          ]
+        },
+        {
+          "type": "problem",
+          "heading": "Problem & Constraints",
+          "content": "Following design reviews with the CTO and senior engineers, several critical areas for improvement were identified in V1. Signal integrity issues in the routing risked unreliable communication between the microcontroller and peripherals. EMI noise posed a threat to sensor accuracy and overall system stability. Physical space constraints made efficient component placement and trace routing a significant challenge, while power line losses threatened to reduce the efficiency of the stepped-down rails. Balancing all four concerns simultaneously — without compromising the board's compact form factor or timeline — became the central challenge of the next iteration."
+        },
+        {
+          "type": "overview",
+          "heading": "V2 — Layout Refinement",
+          "content": "V2 was a focused response to the issues surfaced in design review. The overall board size was reduced through more strategic placement of connectors and decoupling capacitors, and the mounting points were trimmed from four to three to avoid over-constraining the mechanical assembly. Signal integrity saw significant improvement: minimal traces run beneath or parallel to the USB differential pair, the motor driver power and signal return paths are separated from noise-sensitive elements, higher-power rails were widened to reduce energy loss, and perpendicular layer crossings were adopted to minimize EMI and crosstalk. The stackup follows the conventional 4-layer SGPS arrangement."
+        },
+        {
+          "type": "gallery",
+          "layout": "side-by-side",
+          "images": [
+            {
+              "src": "images/Nupeak/NupeakV2.png",
+              "alt": "PCB V2.0",
+              "caption": "V2.0 — refined layout addressing the signal integrity and space constraints from design review."
+            }
+          ]
+        },
+        {
+          "type": "overview",
+          "heading": "V3 — Key Technical Decisions",
+          "content": "The most significant change in V3 was switching from a linear regulator to a buck converter to accommodate the increased power budget from the BLDC motor. This required more intentional component placement with return paths in mind — inductors and the converter were placed along the board edge to minimize noise. Solder jumpers were introduced as a flexible way to reassign GPIO functionality without board respins, since the peripheral count was pushing the pin budget. A haptics element (LRA + driver) was also added for a more customizable user experience. The layer stackup was refined: signal traces are confined to the top and bottom layers, with complete ground and power pours in the middle. The top pour is reserved for the high-power 12V rail only, top-layer traces run perpendicular to the bottom layer, and no signal line runs below the differential USB pair."
+        },
+        {
+          "type": "gallery",
+          "layout": "side-by-side",
+          "images": [
+            {
+              "src": "images/Nupeak/NupeakV3.png",
+              "alt": "PCB V3.0",
+              "caption": "V3.0 — final revision with buck converter, solder jumpers, haptics, and refined 4-layer stackup."
+            }
+          ]
+        },
+        {
+          "type": "gallery",
+          "layout": "grid-3",
+          "images": [
+            {
+              "src": "images/Nupeak/Screen.png",
+              "alt": "Power management schematic",
+              "caption": "Power supply circuit with voltage regulation"
+            },
+            {
+              "src": "images/Nupeak/NupeakDPad.png",
+              "alt": "Microcontroller schematic",
+              "caption": "Microcontroller circuit with peripheral connections"
+            },
+            {
+              "src": "images/Nupeak/NupeakTrig.png",
+              "alt": "Sensor interface schematic",
+              "caption": "Sensor interface circuits and signal conditioning"
+            }
+          ]
+        },
+        {
+          "type": "full-width-image",
+          "src": "images/Nupeak/IMG_1456.jpeg",
+          "alt": "Assembled PCB",
+          "caption": "Fully assembled and tested PCB ready for integration"
+        },
+        {
+          "type": "overview",
+          "heading": "Firmware & UI",
+          "content": "Alongside the hardware iterations, the firmware and user interface were developed in parallel. The RP2350B's dual cores were partitioned by responsibility: Core 0 handles the ROS Serial communication layer, running custom service-client nodes that expose the device's actuators and sensors to the broader ROS Noetic pipeline, while Core 1 is dedicated to the UI — driving the SquareLine Studio-designed TFT interface (built on the LVGL graphics library) for real-time monitoring and interactive control. This split keeps latency-sensitive I/O and serial communication isolated from the rendering loop, ensuring neither task blocks the other."        },
+        {
+          "type": "gallery",
+          "layout": "grid-2",
+          "images": [
+            {
+              "src": "images/Nupeak/SquarelineUIV1.png",
+              "alt": "Firmware architecture",
+              "caption": "V1.0 UI Design with limited features"
+            },
+            {
+              "src": "images/Nupeak/SquarelineUIV2.png",
+              "alt": "User interface display",
+              "caption": "V2.0 Interactive UI over ROS, including battery level, tracking status, recording count, etc"
+            }
+          ]
+        },
+        {
+          "type": "results",
+          "heading": "Results & Impact",
+          "content": "",
+          "metrics": [
+            {
+              "value": "20s",
+              "label": "Time saved per recording"
+            },
+            {
+              "value": "100%",
+              "label": "PCBs' Functional Rate"
+            },
+            {
+              "value": "7",
+              "label": "Additional Features"
+            }
+          ]
+        },
+        {
+          "type": "gallery",
+          "layout": "grid-2",
+          "images": [
+            {
+              "src": "images/Nupeak/Arduino.png",
+              "alt": "Testing setup",
+              "caption": "Testing environment with measurement equipment"
+            },
+            {
+              "src": "images/Nupeak/Imitation Learning Controller.png",
+              "alt": "Final integration",
+              "caption": "Complete system integrated into the imitation learning platform"
+            }
+          ]
+        },
+        {
+          "type": "learnings",
+          "heading": "Key Learnings",
+          "content": "What did you learn from this project? What would you improve if you had more time? What mistakes did you make and how did you overcome them?"
+        },
+        {
+          "type": "gallery",
+          "layout": "grid-3",
+          "images": [
+            {
+              "src": "images/Nupeak/gallery-1.jpg",
+              "alt": "Development process",
+              "caption": "Early prototyping and testing phase"
+            },
+            {
+              "src": "images/Nupeak/gallery-2.jpg",
+              "alt": "Component selection",
+              "caption": "Components evaluated during the design process"
+            },
+            {
+              "src": "images/Nupeak/gallery-3.jpg",
+              "alt": "Debugging session",
+              "caption": "Debugging with oscilloscope and logic analyzer"
+            },
+            {
+              "src": "images/Nupeak/gallery-4.jpg",
+              "alt": "PCB manufacturing",
+              "caption": "PCBs received from manufacturer, ready for assembly"
+            },
+            {
+              "src": "images/Nupeak/gallery-5.jpg",
+              "alt": "Field testing",
+              "caption": "Field testing in real-world conditions"
+            },
+            {
+              "src": "images/Nupeak/gallery-6.jpg",
+              "alt": "Final deployment",
+              "caption": "System deployed and operational in production"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-on-module",
+      "number": "02",
+      "title": "System-on-Module",
+      "subtitle": "High-performance computing module for edge AI applications",
+      "description": "Real-time motor control system using STM32F4 with field-oriented control. Precise position and velocity control for robotics applications with 20kHz control loops.",
+      "thumbnail": "images/SoM.png",
+      "tags": [
+        "STM32",
+        "Motor Control",
+        "Real-time"
+      ],
+      "meta": {
+        "role": "Hardware Engineer",
+        "timeline": "4 months",
+        "teamSize": "2"
+      },
+      "techTags": [
+        "STM32F4",
+        "FOC",
+        "C",
+        "FreeRTOS"
+      ],
+      "sections": []
+    },
+    {
+      "id": "wearable-health-tracker",
+      "number": "03",
+      "title": "Wearable Health Tracker",
+      "subtitle": "Ultra-low-power biometric monitoring device",
+      "description": "Ultra-low-power wearable with flex PCB. Heart rate monitoring, activity tracking, and BLE connectivity achieving 14+ days battery life in a compact form factor.",
+      "thumbnail": "",
+      "tags": [
+        "nRF52",
+        "BLE",
+        "Flex PCB"
+      ],
+      "meta": {
+        "role": "Embedded Engineer",
+        "timeline": "5 months",
+        "teamSize": "3"
+      },
+      "techTags": [
+        "nRF52832",
+        "Bluetooth 5.0",
+        "Flex PCB",
+        "Power Management"
+      ],
+      "sections": []
+    }
+  ]
+}

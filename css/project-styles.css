@@ -1,0 +1,476 @@
+/* Project Detail Page Styles */
+
+/* Header modifications for project pages */
+header {
+    margin-bottom: 0 !important; /* Remove the 8rem margin on project pages */
+    position: absolute; /* Position header absolutely over hero */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10; /* Keep header above hero background */
+    padding: 3rem 0;
+}
+
+header .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem;
+}
+
+header h1,
+header h1 a,
+header nav a {
+    color: #ffffff !important; /* White text since header is over hero image */
+}
+
+.home-link {
+    color: #ffffff;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.home-link:hover {
+    opacity: 0.6;
+}
+
+/* Project Hero Section with Background Image */
+.project-hero {
+    position: relative;
+    margin: 0 calc(-50vw + 50%) 8rem calc(-50vw + 50%); /* Break to viewport edges, no top margin */
+    padding: 20rem calc(50vw - 50% + 3rem) 8rem; /* Top padding for header + content */
+    min-height: 100vh; /* Fill entire viewport height */
+    display: flex;
+    align-items: flex-end;
+    background-size: cover;
+    background-position: center top; /* Align image to top */
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+/* Dark overlay filter */
+.project-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5); /* Change 0.5 to adjust darkness: 0 = no darkness, 1 = black */
+    z-index: 1;
+}
+
+/* Content wrapper to sit above overlay */
+.project-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+
+.project-meta {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.project-hero h2 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+}
+
+.project-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.project-tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.tech-tag {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Hero Image Section */
+.hero-image-section {
+    margin-bottom: 6rem;
+}
+
+.hero-image {
+    width: 100%;
+    margin: 0;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #f5f5f5;
+}
+
+.hero-image figcaption {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Project Content Sections */
+.project-content {
+    max-width: 800px;
+    margin: 0 auto 6rem;
+}
+
+.content-heading {
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+}
+
+.subsection-heading {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 3rem 0 1rem;
+    letter-spacing: -0.01em;
+}
+
+.project-content p {
+    font-size: 1rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+/* Image Galleries */
+.image-gallery {
+    margin-bottom: 6rem;
+}
+
+.gallery-grid-2 {
+    max-width: 700px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.gallery-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+/* Grid galleries: uniform image height, black letterbox, captions baseline-aligned */
+.gallery-grid-2 .gallery-image,
+.gallery-grid-3 .gallery-image {
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-grid-2 .gallery-image img,
+.gallery-grid-3 .gallery-image img {
+    flex: 1;
+    height: 0;              /* override height:auto — lets flex determine height from the row */
+    object-fit: contain;    /* scale to fit without cropping */
+    background: #000000;    /* black fills the empty space around shorter images */
+}
+
+.gallery-grid-2 .gallery-image figcaption,
+.gallery-grid-3 .gallery-image figcaption {
+    text-align: center;
+}
+
+/* Make gallery images clickable */
+.gallery-image img {
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-image img:hover {
+    opacity: 0.9;
+}
+
+/* Lightbox overlay */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+    overflow: hidden;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-image-container {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+}
+
+.lightbox-image-container:active {
+    cursor: grabbing;
+}
+
+.lightbox-image-inner {
+    /* This wrapper will expand to hold the zoomed image */
+    display: inline-block;
+    line-height: 0;
+}
+
+.lightbox img {
+    display: block;
+    /* All dimensions controlled by JavaScript - no CSS constraints */
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color: white;
+    font-size: 3rem;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 1001;
+    transition: opacity 0.3s ease;
+    line-height: 1;
+}
+
+.lightbox-close:hover {
+    opacity: 0.7;
+}
+
+.lightbox-controls {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    z-index: 1001;
+}
+
+.lightbox-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.lightbox-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.lightbox-zoom-level {
+    color: white;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
+}
+
+/* Side-by-side layout — centered single column, caption beneath each image */
+.gallery-side-by-side {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.gallery-side-by-side .gallery-image {
+    margin: 0;
+}
+
+.gallery-side-by-side .gallery-image figcaption {
+    text-align: center;
+}
+
+.gallery-image {
+    margin: 0;
+}
+
+.gallery-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #f5f5f5;
+}
+
+.gallery-image figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+/* Results Grid */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.result-item {
+    text-align: center;
+}
+
+.result-number {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.result-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* Full Width Image */
+.full-width-image {
+    margin: 6rem -3rem;
+}
+
+.full-width-image figure {
+    margin: 0;
+}
+
+.full-width-image img {
+    width: 50%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background: #f5f5f5;
+}
+
+.full-width-image figcaption {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-align: center;
+    padding: 0 3rem;
+}
+
+/* Project Navigation */
+.project-navigation {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    margin: 8rem 0 6rem;
+    padding-top: 4rem;
+    border-top: 1px solid var(--border);
+}
+
+.nav-project {
+    text-decoration: none;
+    color: var(--text);
+    padding: 2rem 1.5rem;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-project:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.nav-label {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.nav-title {
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.back-home {
+    text-align: center;
+    align-items: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header .header-content {
+        padding: 0 1.5rem;
+    }
+
+    .project-hero {
+        margin: 0 calc(-50vw + 50%) 6rem calc(-50vw + 50%);
+        padding: 15rem calc(50vw - 50% + 1.5rem) 6rem;
+        min-height: 100vh; /* Fill entire viewport on mobile too */
+    }
+
+    .full-width-image {
+        margin: 6rem auto;
+        max-width: 100%; /* Allow full width on mobile */
+        padding: 0 1.5rem;
+    }
+
+    .full-width-image figcaption {
+        padding: 0;
+    }
+
+    .gallery-grid-2,
+    .gallery-grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .project-navigation {
+        grid-template-columns: 1fr;
+    }
+
+    .results-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
