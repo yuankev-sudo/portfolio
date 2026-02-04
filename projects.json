@@ -309,7 +309,7 @@
       "title": "D-Stock Racing Telemetry System",
       "subtitle": "Led cockpit board design and contributed to telemetry system for high-speed marine racing application",
       "description": "Led cockpit board design in Altium using STM32F4 for high-speed D-Stock boat racing. Rigid-flex PCB with multi-rail power management (48V-3.3V) and complete HV/LV isolation. Contributed to telemetry board with GPS and CAN bus.",
-      "thumbnail": "images/dstock/v3-assembled.jpg",
+      "thumbnail": "images/UMEB/cock3d.png",
       "tags": [
         "STM32F4",
         "Rigid-Flex PCB",
@@ -352,12 +352,17 @@
         },
         {
           "type": "gallery",
-          "layout": "side-by-side",
+          "layout": "grid-2",
           "images": [
             {
-              "src": "images/dstock/v1-pcb.jpg",
+              "src": "images/UMEB/v1.png",
               "alt": "Version 1 PCB",
               "caption": "V1: Initial two-layer design with basic HV/LV separation, M12 connectors, and DPDT relay for HV contactor control"
+            },
+            {
+              "src": "images/UMEB/v1a.jpg",
+              "alt": "V2 Assembled Board",
+              "caption": "V2 assembled and tested in lab environment"
             }
           ]
         },
@@ -377,12 +382,12 @@
           "layout": "grid-2",
           "images": [
             {
-              "src": "images/dstock/v2-pcb.jpg",
+              "src": "images/UMEB/v2.png",
               "alt": "Version 2 PCB",
               "caption": "V2: Stacked board architecture with FFC connector for complete HV/LV separation"
             },
             {
-              "src": "images/dstock/v2-assembled.jpg",
+              "src": "images/UMEB/v2t.png",
               "alt": "V2 Assembled Board",
               "caption": "V2 assembled and tested in lab environment"
             }
@@ -404,7 +409,7 @@
           "layout": "grid-2",
           "images": [
             {
-              "src": "images/dstock/v3-3d.jpg",
+              "src": "images/UMEB/cock3d.png",
               "alt": "V3 3D Rendering",
               "caption": "3D model showing rigid-flex construction with integrated HV/LV isolation"
             },
