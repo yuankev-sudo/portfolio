@@ -437,17 +437,6 @@
           ]
         },
         {
-          "type": "gallery",
-          "layout": "side-by-side",
-          "images": [
-            {
-              "src": "images/dstock/impedance-calc.jpg",
-              "alt": "Impedance Matching Calculations",
-              "caption": "Microstrip impedance calculations for 50Ω GPS antenna trace routing using PCB stackup parameters"
-            }
-          ]
-        },
-        {
           "type": "technical",
           "heading": "CAN Bus Signal Integrity",
           "content": "",
@@ -463,7 +452,7 @@
           "layout": "side-by-side",
           "images": [
             {
-              "src": "images/dstock/telem-board.jpg",
+              "src": "images/UMEB/telem.png",
               "alt": "Telemetry Board",
               "caption": "Telemetry board featuring GPS module with impedance-matched antenna trace and optocoupled CAN bus interface"
             }
