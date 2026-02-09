@@ -406,15 +406,20 @@
         },
         {
           "type": "gallery",
-          "layout": "grid-2",
+          "layout": "grid-3",
           "images": [
             {
-              "src": "images/UMEB/cock3d.png",
+              "src": "images/UMEB/iso-cock.png",
               "alt": "V3 3D Rendering",
               "caption": "3D model showing rigid-flex construction with integrated HV/LV isolation"
             },
             {
-              "src": "images/dstock/v3-assembled.jpg",
+              "src": "images/UMEB/view1.png",
+              "alt": "V3 Assembled Board",
+              "caption": "V3 final production board with rigid-flex PCB - 40% more compact than V2"
+            },
+            {
+              "src": "images/UMEB/view2.png",
               "alt": "V3 Assembled Board",
               "caption": "V3 final production board with rigid-flex PCB - 40% more compact than V2"
             }
