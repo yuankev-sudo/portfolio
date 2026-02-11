@@ -309,7 +309,7 @@
       "title": "D-Stock Racing Telemetry System",
       "subtitle": "Led cockpit board design and contributed to telemetry system for high-speed marine racing application",
       "description": "Led cockpit board design in Altium using STM32F4 for high-speed D-Stock boat racing. Rigid-flex PCB with multi-rail power management (48V-3.3V) and complete HV/LV isolation. Contributed to telemetry board with GPS and CAN bus.",
-      "thumbnail": "images/UMEB/cock3d.png",
+      "thumbnail": "images/UMEB/iso-cock.png",
       "tags": [
         "STM32F4",
         "Rigid-Flex PCB",
