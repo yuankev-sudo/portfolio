@@ -6,7 +6,7 @@
       "title": "Imitation Learning Tool",
       "subtitle": "Design, fabricate and program a PCB to control and power an imitation learning data collecting tool",
       "description": "Multi-interface platform with custom PCB design. Low-power RP2040 implementation featuring ROS Serial and custom interactive UI.",
-      "thumbnail": "[REDACTED]",
+      "thumbnail": "images/Nupeak/Imitation Learning Controller.png",
       "tags": [
         "RP2040",
         "KiCad",
