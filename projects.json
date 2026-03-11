@@ -488,6 +488,67 @@
           "content": "The project is currently in the assembly and enclosure design phase. I'm designing a custom case to house the rigid-flex cockpit board and telemetry system, ensuring proper mechanical protection while maintaining access for debugging and field servicing. PCB assembly is underway with careful attention to component placement and soldering quality for the rigid-flex construction. Stay tuned for updates on the final integrated system and on-water testing results."
         }
       ]
+    },
+    {
+      "id": "supercapacitor-power-module",
+      "number": "04",
+      "title": "Supercapacitor Power Module",
+      "subtitle": "Smart power assist module for a high-agility infantry robot, developed under Michigan Advanced Robotics Competition",
+      "description": "Supercapacitor-based power module providing burst energy delivery for rapid maneuvers in competitive robotics. Designed for high peak current demand with smart charge/discharge control.",
+      "thumbnail": "images/MARC/super_capacitor.png",
+      "tags": [
+        "Supercapacitors",
+        "Power Electronics",
+        "KiCad",
+        "C++"
+      ],
+      "meta": {
+        "role": "Captain & Co-founder",
+        "timeline": "Ongoing",
+        "teamSize": "Team"
+      },
+      "techTags": [
+        "KiCad",
+        "Supercapacitors",
+        "Power Electronics",
+        "C++"
+      ],
+      "sections": [
+        {
+          "type": "overview",
+          "heading": "Overview",
+          "content": "As captain and co-founder of Michigan Advanced Robotics Competition (MARC), I'm leading the development of a Supercapacitor Power Module designed to provide intelligent burst power assist for a high-agility infantry robot. Infantry robots demand extreme power in short windows — hard acceleration, rapid direction changes, and aggressive maneuvers all create peak current draws that a battery alone handles poorly. The module sits between the battery and drive system, absorbing charge during low-demand phases and dumping it during peak loads to keep the robot fast and responsive without stressing the primary power source."
+        },
+        {
+          "type": "problem",
+          "heading": "Problem & Constraints",
+          "content": "Lithium batteries are energy-dense but have limited peak current capability — pushing them hard accelerates degradation and causes voltage sag that slows the robot at the worst possible moment. A competitive infantry robot needs repeatable, high-current bursts throughout a match without thermal runaway or brownouts. The module had to be compact enough to fit within the robot's weight and space budget, integrate cleanly with the existing power architecture, and be robust enough to survive the mechanical shock of combat."
+        },
+        {
+          "type": "overview",
+          "heading": "Technical Approach",
+          "content": "Supercapacitors (ultracapacitors) are the right tool here — they can charge and discharge orders of magnitude faster than batteries and tolerate far more charge cycles. The module uses a bank of supercapacitors managed by a bidirectional DC-DC converter, which controls when energy flows in and out based on bus voltage and current demand. A microcontroller monitors system state and governs the charge/discharge logic, ensuring the caps are primed before high-demand events and protected from overvoltage. Balancing circuits keep individual cell voltages even across the bank to prevent premature cell degradation."
+        },
+        {
+          "type": "results",
+          "heading": "Status",
+          "content": "Project is currently in active development.",
+          "metrics": [
+            {
+              "value": "$7.5K+",
+              "label": "Funding raised"
+            },
+            {
+              "value": "3",
+              "label": "Subteams led"
+            },
+            {
+              "value": "TBD",
+              "label": "Peak current output"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
