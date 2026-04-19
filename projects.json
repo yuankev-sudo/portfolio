@@ -495,7 +495,7 @@
       "title": "Supercapacitor Power Module",
       "subtitle": "Smart power assist module for a high-agility infantry robot, developed under Michigan Advanced Robotics Competition",
       "description": "Supercapacitor-based power module providing burst energy delivery for rapid maneuvers in competitive robotics. Designed for high peak current demand with smart charge/discharge control.",
-      "thumbnail": "images/MARC/super_capacitor.png",
+      "thumbnail": "images/MARC/SuperCap v1 assembled.png",
       "tags": [
         "Supercapacitors",
         "Power Electronics",
@@ -525,6 +525,27 @@
           "content": "Lithium batteries are energy-dense but have limited peak current capability — pushing them hard accelerates degradation and causes voltage sag that slows the robot at the worst possible moment. A competitive infantry robot needs repeatable, high-current bursts throughout a match without thermal runaway or brownouts. The module had to be compact enough to fit within the robot's weight and space budget, integrate cleanly with the existing power architecture, and be robust enough to survive the mechanical shock of combat."
         },
         {
+          "type": "gallery",
+          "layout": "grid-3",
+          "images": [
+            {
+              "src": "images/MARC/SuperCap v1 layout.png",
+              "alt": "Version 1 PCB",
+              "caption": "Fused + Regulated Input (Slow start to prevent inrush current @ high dV), Super Cap Array health monitor and regulated output. STM32 controlled MOSFETs for reverse current blocking"
+            },
+            {
+              "src": "images/MARC/super_capacitor.png",
+              "alt": "V1 3D Board",
+              "caption": "V1 SuperCap Board 3D view"
+            },
+            {
+              "src": "images/MARC/SuperCap v1 assembled.png",
+              "alt": "V1 Assembled Board",
+              "caption": "V1 SuperCap Final Assembled"
+            }
+          ]
+        },
+        {
           "type": "overview",
           "heading": "Technical Approach",
           "content": "Supercapacitors (ultracapacitors) are the right tool here — they can charge and discharge orders of magnitude faster than batteries and tolerate far more charge cycles. The module uses a bank of supercapacitors managed by a bidirectional DC-DC converter, which controls when energy flows in and out based on bus voltage and current demand. A microcontroller monitors system state and governs the charge/discharge logic, ensuring the caps are primed before high-demand events and protected from overvoltage. Balancing circuits keep individual cell voltages even across the bank to prevent premature cell degradation."
@@ -532,19 +553,19 @@
         {
           "type": "results",
           "heading": "Status",
-          "content": "Project is currently in active development.",
+          "content": "Project is currently in active testing and development.",
           "metrics": [
             {
-              "value": "$7.5K+",
+              "value": "$12K+",
               "label": "Funding raised"
             },
             {
-              "value": "3",
-              "label": "Subteams led"
+              "value": "10+",
+              "label": "Members recruited"
             },
             {
               "value": "TBD",
-              "label": "Peak current output"
+              "label": "Success?"
             }
           ]
         }
