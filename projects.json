@@ -574,7 +574,7 @@
     {
       "id": "clearpath",
       "number": "05",
-      "title": "ClearPath",
+      "title": "Clarus",
       "subtitle": "Profile-aware routing for large vehicles, built on measured LiDAR pavement reality — not a restriction database",
       "description": "2nd place ($3,000) out of 12 teams at the CYVL Hackathon. 6-hour MVP routing large vehicles through Somerville, MA using CYVL LiDAR data. Per-turn swept-path feasibility checks block physically impossible turns and reroute automatically.",
       "thumbnail": "images/CYVL-Hack/Main Web Page.png",
@@ -602,7 +602,7 @@
         {
           "type": "overview",
           "heading": "Overview",
-          "content": "Built ClearPath at the CYVL Hackathon in 6 hours — a routing tool that solves a problem existing truck routers (Google Maps, Waze, Route4Me) fundamentally can't: they route off reported restriction databases, not measured road reality. ClearPath routes off CYVL LiDAR data for Somerville, MA, checking per-turn swept-path feasibility against real intersection geometry and LiDAR-derived obstacles like trees and utility poles. A fire truck that physically can't clear a tight corner gets flagged and rerouted — before it gets there."
+          "content": "Built Clarus at the CYVL Hackathon in 6 hours — a routing tool that solves a problem existing truck routers (Google Maps, Waze, Route4Me) fundamentally can't: they route off reported restriction databases, not measured road reality. Clarus routes off CYVL LiDAR data for Somerville, MA, checking per-turn swept-path feasibility against real intersection geometry and LiDAR-derived obstacles like trees and utility poles. A fire truck that physically can't clear a tight corner gets flagged and rerouted — before it gets there."
         },
         {
           "type": "gallery",
@@ -610,8 +610,8 @@
           "images": [
             {
               "src": "images/CYVL-Hack/Main Web Page.png",
-              "alt": "ClearPath routing UI",
-              "caption": "ClearPath UI — three routing profiles with live comparison. Orange markers flag tight/fail intersections along the Large Vehicle route."
+              "alt": "Clarus routing UI",
+              "caption": "Clarus UI — three routing profiles with live comparison. Orange markers flag tight/fail intersections along the Large Vehicle route."
             },
             {
               "src": "images/CYVL-Hack/Lidar Demo Segment.png",
