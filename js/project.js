@@ -50,6 +50,7 @@ function generateProjectContent(project, allProjects) {
                 <div class="project-tech-tags">
                     ${project.techTags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
                 </div>
+                ${project.github ? `<div class="project-hero-links"><a href="${project.github}" target="_blank" rel="noopener noreferrer" class="github-link">View on GitHub →</a></div>` : ''}
             </div>
         </section>
     `;
