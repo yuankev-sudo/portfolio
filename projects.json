@@ -630,9 +630,8 @@
                 {
                     "type": "video",
                     "heading": "Demo",
-                    "src": "images/CYVL-Hack/demo.mp4",
-                    "format": "mp4",
-                    "caption": "Live demo — routing a fire truck through Somerville, MA. The Large Vehicle profile detects a failing intersection, flags it with an orange marker, and automatically reroutes."
+                    "caption": "Live demo — routing a fire truck through Somerville, MA. The Large Vehicle profile detects a failing intersection, flags it with an orange marker, and automatically reroutes.",
+                    "youtube": "CS9W8MGKsOE"
                 },
                 {
                     "type": "problem",

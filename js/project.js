@@ -172,17 +172,29 @@ function renderSection(section) {
             break;
 
         case 'video':
-            html += `
-                <section class="project-content">
-                    ${section.heading ? `<h3 class="content-heading">${section.heading}</h3>` : ''}
-                    <div class="video-container">
-                        <video controls playsinline muted loop>
-                            <source src="${section.src}" type="video/${section.format || 'mp4'}">
-                        </video>
-                    </div>
-                    ${section.caption ? `<figcaption class="video-caption">${section.caption}</figcaption>` : ''}
-                </section>
-            `;
+            if (section.youtube) {
+                html += `
+                    <section class="project-content">
+                        ${section.heading ? `<h3 class="content-heading">${section.heading}</h3>` : ''}
+                        <div class="video-container youtube-embed">
+                            <iframe src="https://www.youtube.com/embed/${section.youtube}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        ${section.caption ? `<figcaption class="video-caption">${section.caption}</figcaption>` : ''}
+                    </section>
+                `;
+            } else {
+                html += `
+                    <section class="project-content">
+                        ${section.heading ? `<h3 class="content-heading">${section.heading}</h3>` : ''}
+                        <div class="video-container">
+                            <video controls playsinline muted loop>
+                                <source src="${section.src}" type="video/${section.format || 'mp4'}">
+                            </video>
+                        </div>
+                        ${section.caption ? `<figcaption class="video-caption">${section.caption}</figcaption>` : ''}
+                    </section>
+                `;
+            }
             break;
     }
     
