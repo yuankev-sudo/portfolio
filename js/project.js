@@ -174,6 +174,7 @@ function renderSection(section) {
         case 'video':
             html += `
                 <section class="project-content">
+                    ${section.heading ? `<h3 class="content-heading">${section.heading}</h3>` : ''}
                     <div class="video-container">
                         <video controls playsinline muted loop>
                             <source src="${section.src}" type="video/${section.format || 'mp4'}">
