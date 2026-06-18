@@ -118,7 +118,7 @@ function renderSection(section) {
                     // Render video in gallery
                     html += `
                         <figure class="gallery-image">
-                            <video controls playsinline muted loop>
+                            <video playsinline muted loop>
                                 <source src="${item.src}" type="video/${item.format || 'mp4'}">
                             </video>
                             <figcaption>${item.caption}</figcaption>
@@ -441,9 +441,36 @@ function initLightbox() {
     });
 }
 
+// Show/hide native video controls on hover with auto-hide after inactivity
+function initVideoControls() {
+    document.querySelectorAll('video').forEach(video => {
+        let hideTimer;
+
+        const showControls = () => {
+            clearTimeout(hideTimer);
+            video.setAttribute('controls', '');
+        };
+
+        const scheduleHide = () => {
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(() => {
+                video.removeAttribute('controls');
+            }, 2000);
+        };
+
+        video.addEventListener('mouseenter', showControls);
+        video.addEventListener('mousemove', showControls);
+        video.addEventListener('mouseleave', scheduleHide);
+
+        // Auto-play muted gallery videos
+        video.play().catch(() => {});
+    });
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     loadProject().then(() => {
         initLightbox();
+        initVideoControls();
     });
 });
