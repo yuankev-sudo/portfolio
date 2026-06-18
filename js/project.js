@@ -455,7 +455,7 @@ function initVideoControls() {
             clearTimeout(hideTimer);
             hideTimer = setTimeout(() => {
                 video.removeAttribute('controls');
-            }, 2000);
+            }, 500);
         };
 
         video.addEventListener('mouseenter', showControls);
