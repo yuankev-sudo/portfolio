@@ -468,7 +468,21 @@ function initVideoControls() {
 }
 
 // Initialize on page load
+// Add a shadow to the floating header once the page is scrolled
+function setupStickyHeader() {
+    const header = document.querySelector('header');
+    if (!header) return;
+
+    const onScroll = () => {
+        header.classList.toggle('scrolled', window.scrollY > 10);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    setupStickyHeader();
     loadProject().then(() => {
         initLightbox();
         initVideoControls();

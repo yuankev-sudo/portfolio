@@ -1,14 +1,34 @@
 /* Project Detail Page Styles */
 
-/* Header modifications for project pages */
+/* Prevent horizontal scroll from the full-bleed hero's 100vw/50vw breakout,
+   which overshoots by the vertical scrollbar's width. */
+html,
+body {
+    overflow-x: hidden;
+}
+
+/* Header modifications for project pages — match the main page's floating bar.
+   Uses fixed (not sticky) so it overlays the full-bleed hero instead of pushing
+   it down, while still floating at the same position as you scroll. */
 header {
     margin-bottom: 0 !important; /* Remove the 8rem margin on project pages */
-    position: absolute; /* Position header absolutely over hero */
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 10; /* Keep header above hero background */
-    padding: 3rem 0;
+    z-index: 100;
+    padding: 1.5rem 0;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Shadow appears once the header floats over content */
+header.scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-bottom-color: var(--border);
 }
 
 header .header-content {
@@ -18,13 +38,21 @@ header .header-content {
 }
 
 header h1,
-header h1 a,
+header h1 a {
+    color: var(--text); /* Dark text to match the frosted bar */
+}
+
 header nav a {
-    color: #ffffff !important; /* White text since header is over hero image */
+    color: var(--text-light);
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: var(--accent);
 }
 
 .home-link {
-    color: #ffffff;
+    color: var(--text);
     text-decoration: none;
     transition: opacity 0.3s ease;
 }
