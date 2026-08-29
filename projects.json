@@ -6,8 +6,8 @@
             "title": "Imitation Learning Tool",
             "category": "Electrical",
             "date": "Aug 2025",
-            "subtitle": "Design, fabricate and program a PCB to control and power an imitation learning data collecting tool",
-            "description": "Multi-interface platform with custom PCB design. Low-power RP2040 implementation featuring ROS Serial and custom interactive UI.",
+            "subtitle": "Custom PCB, firmware, and UI for a robot-arm training data collection tool",
+            "description": "Designed a ROS-enabled RP2350B controller from scratch across three PCB revisions. Now used in production to collect imitation learning data.",
             "thumbnail": "images/Nupeak/Imitation Learning Controller.png",
             "tags": [
                 "RP2040",
@@ -31,53 +31,47 @@
                 {
                     "type": "overview",
                     "heading": "Overview",
-                    "content": "During a summer internship at Nupeak Robotics after my freshman year, I designed and built a fully integrated robot training tool from the ground up — despite having no prior embedded systems experience. Over three months, I developed hands-on expertise in PCB design, UI integration, and firmware programming, ultimately delivering a ROS-enabled platform now used by the company to collect imitation learning data for training robot arms."
+                    "content": "Nupeak Robotics needed a handheld tool to record human demonstrations for training robot arms. Over a three-month internship after my freshman year I designed the board, firmware, and UI from scratch, with no prior embedded systems experience. It now ships internally as the company's imitation learning data collection device."
+                },
+                {
+                    "type": "problem",
+                    "heading": "The Challenge",
+                    "content": "Design review with the CTO surfaced four problems with V1 that had to be solved without growing the board or slipping the timeline:",
+                    "bullets": [
+                        "Signal integrity issues risking dropped comms between the MCU and peripherals",
+                        "EMI from the motor driver threatening sensor accuracy",
+                        "Tight space for component placement and routing",
+                        "Losses on the stepped-down 12V → 5V / 3.3V power rails"
+                    ]
+                },
+                {
+                    "type": "technical",
+                    "heading": "Three Revisions",
+                    "content": "",
+                    "bullets": [
+                        "<strong>V1:</strong> first board from scratch in KiCad, RP2350B, BLDC motor controller, TFT display, tactile buttons",
+                        "<strong>V2:</strong> smaller footprint, motor return paths separated from sensitive nets, widened power rails, 4-layer SGPS stackup, nothing routed under the USB differential pair",
+                        "<strong>V3:</strong> buck converter to cover the BLDC power budget, solder jumpers to reassign GPIO without a respin, haptics (LRA + driver), signals confined to outer layers"
+                    ]
                 },
                 {
                     "type": "gallery",
-                    "layout": "side-by-side",
+                    "layout": "grid-3",
                     "images": [
                         {
                             "src": "images/Nupeak/NupeakV1.png",
                             "alt": "V1 Main Controller PCB",
-                            "caption": "V1 — designed from scratch in KiCad. Migrated to the RP2350B, added a BLDC motor controller, TFT display, and tactile buttons, with stepped-down power rails (12V → 3.3V / 5V)."
-                        }
-                    ]
-                },
-                {
-                    "type": "problem",
-                    "heading": "Problem & Constraints",
-                    "content": "Following design reviews with the CTO and senior engineers, several critical areas for improvement were identified in V1. Signal integrity issues in the routing risked unreliable communication between the microcontroller and peripherals. EMI noise posed a threat to sensor accuracy and overall system stability. Physical space constraints made efficient component placement and trace routing a significant challenge, while power line losses threatened to reduce the efficiency of the stepped-down rails. Balancing all four concerns simultaneously — without compromising the board's compact form factor or timeline — became the central challenge of the next iteration."
-                },
-                {
-                    "type": "overview",
-                    "heading": "V2 — Layout Refinement",
-                    "content": "V2 was a focused response to the issues surfaced in design review. The overall board size was reduced through more strategic placement of connectors and decoupling capacitors, and the mounting points were trimmed from four to three to avoid over-constraining the mechanical assembly. Signal integrity saw significant improvement: minimal traces run beneath or parallel to the USB differential pair, the motor driver power and signal return paths are separated from noise-sensitive elements, higher-power rails were widened to reduce energy loss, and perpendicular layer crossings were adopted to minimize EMI and crosstalk. The stackup follows the conventional 4-layer SGPS arrangement."
-                },
-                {
-                    "type": "gallery",
-                    "layout": "side-by-side",
-                    "images": [
+                            "caption": "V1: first layout"
+                        },
                         {
                             "src": "images/Nupeak/NupeakV2.png",
                             "alt": "PCB V2.0",
-                            "caption": "V2.0 — refined layout addressing the signal integrity and space constraints from design review."
-                        }
-                    ]
-                },
-                {
-                    "type": "overview",
-                    "heading": "V3 — Key Technical Decisions",
-                    "content": "The most significant change in V3 was switching from a linear regulator to a buck converter to accommodate the increased power budget from the BLDC motor. This required more intentional component placement with return paths in mind — inductors and the converter were placed along the board edge to minimize noise. Solder jumpers were introduced as a flexible way to reassign GPIO functionality without board respins, since the peripheral count was pushing the pin budget. A haptics element (LRA + driver) was also added for a more customizable user experience. The layer stackup was refined: signal traces are confined to the top and bottom layers, with complete ground and power pours in the middle. The top pour is reserved for the high-power 12V rail only, top-layer traces run perpendicular to the bottom layer, and no signal line runs below the differential USB pair."
-                },
-                {
-                    "type": "gallery",
-                    "layout": "side-by-side",
-                    "images": [
+                            "caption": "V2: refined routing and smaller footprint"
+                        },
                         {
                             "src": "images/Nupeak/NupeakV3.png",
                             "alt": "PCB V3.0",
-                            "caption": "V3.0 — final revision with buck converter, solder jumpers, haptics, and refined 4-layer stackup."
+                            "caption": "V3: buck converter, solder jumpers, haptics"
                         }
                     ]
                 },
@@ -88,17 +82,17 @@
                         {
                             "src": "images/Nupeak/Screen.png",
                             "alt": "Power management schematic",
-                            "caption": "Power supply circuit with voltage regulation"
+                            "caption": "Power supply and voltage regulation"
                         },
                         {
                             "src": "images/Nupeak/NupeakDPad.png",
                             "alt": "Microcontroller schematic",
-                            "caption": "Microcontroller circuit with peripheral connections"
+                            "caption": "MCU and peripheral connections"
                         },
                         {
                             "src": "images/Nupeak/NupeakTrig.png",
                             "alt": "Sensor interface schematic",
-                            "caption": "Sensor interface circuits and signal conditioning"
+                            "caption": "Sensor interface and signal conditioning"
                         }
                     ]
                 },
@@ -106,12 +100,17 @@
                     "type": "full-width-image",
                     "src": "images/Nupeak/IMG_1456.jpeg",
                     "alt": "Assembled PCB",
-                    "caption": "Fully assembled and tested PCB ready for integration"
+                    "caption": "Fully assembled and tested board"
                 },
                 {
                     "type": "overview",
                     "heading": "Firmware & UI",
-                    "content": "Alongside the hardware iterations, the firmware and user interface were developed in parallel. The RP2350B's dual cores were partitioned by responsibility: Core 0 handles the ROS Serial communication layer, running custom service-client nodes that expose the device's actuators and sensors to the broader ROS Noetic pipeline, while Core 1 is dedicated to the UI — driving the SquareLine Studio-designed TFT interface (built on the LVGL graphics library) for real-time monitoring and interactive control. This split keeps latency-sensitive I/O and serial communication isolated from the rendering loop, ensuring neither task blocks the other."
+                    "content": "",
+                    "bullets": [
+                        "<strong>Core 0:</strong> ROS Serial layer with custom service/client nodes exposing actuators and sensors to ROS Noetic",
+                        "<strong>Core 1:</strong> LVGL TFT interface built in SquareLine Studio for live status and control",
+                        "Splitting the cores keeps latency-sensitive I/O from ever blocking the render loop"
+                    ]
                 },
                 {
                     "type": "gallery",
@@ -119,93 +118,82 @@
                     "images": [
                         {
                             "src": "images/Nupeak/SquarelineUIV1.png",
-                            "alt": "Firmware architecture",
-                            "caption": "V1.0 UI Design with limited features"
+                            "alt": "UI V1",
+                            "caption": "V1 UI"
                         },
                         {
                             "src": "images/Nupeak/SquarelineUIV2.png",
-                            "alt": "User interface display",
-                            "caption": "V2.0 Interactive UI over ROS, including battery level, tracking status, recording count, etc"
+                            "alt": "UI V2",
+                            "caption": "V2 UI: battery, tracking status, and recording count over ROS"
                         }
                     ]
                 },
                 {
                     "type": "results",
-                    "heading": "Results & Impact",
+                    "heading": "Results",
                     "content": "",
                     "metrics": [
                         {
                             "value": "20s",
-                            "label": "Time saved per recording"
+                            "label": "Saved per recording"
                         },
                         {
                             "value": "100%",
-                            "label": "PCBs' Functional Rate"
+                            "label": "PCB functional rate"
                         },
                         {
                             "value": "7",
-                            "label": "Additional Features"
+                            "label": "Features added"
                         }
                     ]
-                },
-                {
-                    "type": "gallery",
-                    "layout": "grid-2",
-                    "images": [
-                        {
-                            "src": "images/Nupeak/Arduino.png",
-                            "alt": "Testing setup",
-                            "caption": "Testing environment with measurement equipment"
-                        },
-                        {
-                            "src": "images/Nupeak/Imitation Learning Controller.png",
-                            "alt": "Final integration",
-                            "caption": "Complete system integrated into the imitation learning platform"
-                        }
-                    ]
-                },
-                {
-                    "type": "overview",
-                    "heading": "Additional Images",
-                    "content": ""
                 },
                 {
                     "type": "gallery",
                     "layout": "grid-3",
                     "images": [
                         {
-                            "src": "images/Nupeak/NupeakInject.png",
-                            "alt": "Development process",
-                            "caption": "CAN + PWR Injector Board"
+                            "src": "images/Nupeak/Imitation Learning Controller.png",
+                            "alt": "Final integration",
+                            "caption": "Integrated into the imitation learning platform"
                         },
                         {
-                            "src": "images/Nupeak/fab.jpeg",
-                            "alt": "Component selection",
-                            "caption": "Fabricating PCBs using Stencile"
-                        },
-                        {
-                            "src": "images/Nupeak/fab2.jpeg",
-                            "alt": "Debugging session",
-                            "caption": "Finished Assembled LED PCBs"
+                            "src": "images/Nupeak/Arduino.png",
+                            "alt": "Testing setup",
+                            "caption": "Bench testing with measurement equipment"
                         },
                         {
                             "src": "images/Nupeak/test.jpeg",
-                            "alt": "PCB manufacturing",
-                            "caption": "Testing LED RGB Command"
+                            "alt": "LED RGB command test",
+                            "caption": "Testing LED RGB command"
+                        },
+                        {
+                            "src": "images/Nupeak/NupeakInject.png",
+                            "alt": "Injector board",
+                            "caption": "CAN + power injector board"
+                        },
+                        {
+                            "src": "images/Nupeak/fab.jpeg",
+                            "alt": "Fabrication",
+                            "caption": "Stencil fabrication"
+                        },
+                        {
+                            "src": "images/Nupeak/fab2.jpeg",
+                            "alt": "Assembled LED PCBs",
+                            "caption": "Assembled LED boards"
                         },
                         {
                             "type": "video",
                             "src": "images/Nupeak/mov1.MOV",
                             "format": "mp4",
-                            "alt": "Field testing",
-                            "caption": "Testing LVGL Graphics Export"
+                            "alt": "LVGL graphics test",
+                            "caption": "LVGL graphics export"
                         },
                         {
                             "type": "video",
                             "src": "images/Nupeak/mov2.MOV",
                             "format": "mp4",
-                            "alt": "Final deployment",
-                            "caption": "Testing ROS Serial"
+                            "alt": "ROS Serial test",
+                            "caption": "ROS Serial test"
                         }
                     ]
                 }
@@ -217,8 +205,8 @@
             "title": "System-on-Module",
             "category": "Electrical",
             "date": "Dec 2025",
-            "subtitle": "System-on-Module for local motor control for quadruped project",
-            "description": "Compact motor control module using RP2350B for distributed actuation in quadruped robotics. Custom castellated edge design for board-to-board stacking with optimized signal integrity.",
+            "subtitle": "Compact RP2350B module for local joint control on a quadruped",
+            "description": "Stackable castellated module that puts a controller next to each actuator. Four revisions to keep signals clean amid twelve motors of PWM noise.",
             "thumbnail": "images/Atombot/v3.png",
             "tags": [
                 "RP2350B",
@@ -237,72 +225,73 @@
                 {
                     "type": "overview",
                     "heading": "Overview",
-                    "content": "Built a compact System-on-Module to control individual joint actuators in a quadruped robot. Each leg needed its own local controller to handle motor commands without overwhelming the main processor, so I designed this board around the RP2350B to sit right next to each actuator. Getting clean signals in an environment full of motor noise took several iterations, but the final design handles the electrical chaos of PWM motor drivers while keeping communication rock-solid."
-                },
-                {
-                    "type": "gallery",
-                    "layout": "side-by-side",
-                    "images": [
-                        {
-                            "src": "images/Atombot/v1.png",
-                            "alt": "System-on-Module V1",
-                            "caption": "V1 — Initial SoM design with RP2350B, external crystal, and flash memory for program storage."
-                        }
-                    ]
+                    "content": "Each joint on our quadruped needed its own local controller so the main processor wasn't handling every motor command. I designed a deliberately minimal RP2350B module (MCU, crystal, flash, nothing else) that stacks onto the main board through castellated edges and sits right next to the actuator."
                 },
                 {
                     "type": "problem",
-                    "heading": "Problem & Constraints",
-                    "content": "Twelve motors switching at high frequencies creates an electrical nightmare. The SoM had to fit in tight spaces near each joint while dealing with all that noise, plus handle high-speed communication between modules without dropping data. The mechanical team needed castellated edges for board-to-board stacking to save space. The approach was to keep the module dead simple — just the brain (RP2350B), its clock, and flash memory. All the power and motor control stuff stays on the main board. So the real challenge was keeping differential signals clean, making sure the crystal circuit was stable, and designing custom castellated edges that could handle repeated assembly cycles."
+                    "heading": "The Challenge",
+                    "content": "",
+                    "bullets": [
+                        "Twelve motors switching at high frequency, all coupling noise into everything nearby",
+                        "Module has to fit the tight space next to each joint",
+                        "High-speed inter-module comms that can't drop data",
+                        "Mechanical team needed castellated edges for board-to-board stacking"
+                    ]
                 },
                 {
-                    "type": "overview",
-                    "heading": "Technical Approach",
-                    "content": "Signal integrity was the main battle here. I routed all high-speed differential pairs with matched lengths and controlled impedance — if the timing's off even slightly, you get data corruption. Scattered vias everywhere for ground plane stitching to give return currents a clean path back and cut down on EMI. Kept power and ground planes separate so digital noise wouldn't couple into anything sensitive. The castellated edges were initially through hole pin headers, but in V2 I decided to design a custom one since I couldn't find a footprint that worked for our stacking scheme. The design is intentionally minimal — just the RP2350B, a crystal for stable clocking, and external flash for program storage. Everything else (power regulation, motor drivers) lives on the main board that this module plugs into."
+                    "type": "technical",
+                    "heading": "Approach",
+                    "content": "",
+                    "bullets": [
+                        "Length-matched, impedance-controlled differential pairs, since small timing skew means corrupted data",
+                        "Stitching vias throughout for clean return paths and lower EMI",
+                        "Separate power and ground planes so digital noise stays off sensitive nets",
+                        "Custom castellated footprint in V2, since no stock footprint fit our stacking scheme",
+                        "Power regulation and motor drivers stay on the carrier board, keeping the module simple"
+                    ]
                 },
                 {
                     "type": "gallery",
                     "layout": "grid-2",
                     "images": [
                         {
+                            "src": "images/Atombot/v1.png",
+                            "alt": "System-on-Module V1",
+                            "caption": "V1: RP2350B, external crystal, flash"
+                        },
+                        {
                             "src": "images/Atombot/v1.1.png",
                             "alt": "SoM V2",
-                            "caption": "V2 — Added castellated edges for board-to-board stacking"
+                            "caption": "V2: castellated edges for board-to-board stacking"
                         },
                         {
                             "src": "images/Atombot/v2.png",
                             "alt": "SoM V3",
-                            "caption": "V3 — Design with optimized signal integrity and custom castellated footprint"
+                            "caption": "V3: custom castellated footprint, optimized signal integrity"
+                        },
+                        {
+                            "src": "images/Atombot/v3.png",
+                            "alt": "Final SoM board",
+                            "caption": "Final board: improved component orientation"
                         }
                     ]
                 },
                 {
                     "type": "results",
-                    "heading": "Results & Impact",
+                    "heading": "Results",
                     "content": "",
                     "metrics": [
                         {
                             "value": "4",
-                            "label": "Design Iterations"
+                            "label": "Design iterations"
                         },
                         {
                             "value": "4",
-                            "label": "Modules Per Robot"
+                            "label": "Modules per robot"
                         },
                         {
                             "value": "100%",
-                            "label": "First Assembly Success"
-                        }
-                    ]
-                },
-                {
-                    "type": "gallery",
-                    "layout": "side-by-side",
-                    "images": [
-                        {
-                            "src": "images/Atombot/v3.png",
-                            "alt": "Assembled module",
-                            "caption": "Final SoM board with improved component orientation and castellated edges"
+                            "label": "First assembly success"
                         }
                     ]
                 }
@@ -314,8 +303,8 @@
             "title": "D-Stock Racing Telemetry System",
             "category": "Electrical",
             "date": "Mar 2026",
-            "subtitle": "Led cockpit board design and contributed to telemetry system for high-speed marine racing application",
-            "description": "Led cockpit board design in Altium using STM32F4 for high-speed D-Stock boat racing. Rigid-flex PCB with multi-rail power management (48V-3.3V) and complete HV/LV isolation. Contributed to telemetry board with GPS and CAN bus.",
+            "subtitle": "Cockpit and telemetry boards for a high-speed electric race boat",
+            "description": "Led cockpit board design in Altium: rigid-flex PCB, 48V to 3.3V power tree, full HV/LV isolation. Three revisions to survive vibration, water, and motor noise.",
             "thumbnail": "images/UMEB/iso-cock.png",
             "tags": [
                 "STM32F4",
@@ -339,76 +328,26 @@
                 {
                     "type": "overview",
                     "heading": "Overview",
-                    "content": "Led the complete design of the cockpit board and contributed to the telemetry board for high-speed D-Stock boat racing applications. The cockpit system features a rigid-flex PCB with multi-rail power management (48V to 3.3V), while the telemetry board provides GPS tracking and CAN bus communication. Through three design iterations on the cockpit board, the system evolved from a basic two-board design to a highly integrated rigid-flex solution with complete high-voltage/low-voltage isolation and enhanced signal integrity."
+                    "content": "I led the cockpit board through three revisions and contributed to the GPS/CAN telemetry board for D-Stock boat racing. The final cockpit board is a rigid-flex design with complete HV/LV galvanic isolation, 40% smaller than the version before it, with two connector failure points designed out entirely."
                 },
                 {
                     "type": "problem",
-                    "heading": "Problem & Constraints",
-                    "content": "High-speed boat racing demands extreme reliability in harsh conditions including constant vibration, water exposure, and electrical noise from high-power motors. The cockpit system needed to manage 48V high-voltage inputs while providing clean 3.3V logic signals, all within a compact form factor that could withstand mechanical shock. Signal integrity was critical for GPS antenna routing and CAN bus communication, while the design had to maintain complete electrical isolation between high-voltage and low-voltage circuits to ensure safety and prevent ground loops."
-                },
-                {
-                    "type": "technical",
-                    "heading": "Technical Approach & Design Evolution",
-                    "content": "The project evolved through three major iterations, each addressing specific challenges discovered through testing and real-world operation. Starting with a basic two-layer design, the system progressively improved in reliability, signal integrity, and manufacturing robustness.",
-                    "subsections": [
-                        {
-                            "heading": "V1: Foundation Design",
-                            "content": "The initial design established the core architecture with SD card logging using pull-up resistors for SPI communication, M12 connectors for high reliability and voltage rating in marine environments, comprehensive test points for debugging, CAN transceiver with basic signal integrity measures, fundamental HV/LV separation on the same board, DPDT relay for HV contactor control, backup SPDTs for digital switching redundancy, and Boot option paired with RST button for programming flexibility."
-                        }
-                    ]
-                },
-                {
-                    "type": "gallery",
-                    "layout": "grid-2",
-                    "images": [
-                        {
-                            "src": "images/UMEB/v1.png",
-                            "alt": "Version 1 PCB",
-                            "caption": "V1: Initial two-layer design with basic HV/LV separation, M12 connectors, and DPDT relay for HV contactor control"
-                        },
-                        {
-                            "src": "images/UMEB/v1a.jpg",
-                            "alt": "V2 Assembled Board",
-                            "caption": "V2 assembled and tested in lab environment"
-                        }
-                    ]
-                },
-                {
-                    "type": "technical",
-                    "heading": "V2: Signal Integrity & Separation",
+                    "heading": "The Challenge",
                     "content": "",
-                    "subsections": [
-                        {
-                            "heading": "Key Improvements",
-                            "content": "Version 2 introduced significant improvements including SD card buffer for enhanced signal integrity and drive strength, external resistor for crystal oscillator to limit current and improve stability, complete HV/LV separation using stacked boards for superior isolation and better size constraints, FFC (Flexible Flat Cable) connectors for inter-board communication, simplified programming interface with SWD and Boot0 elimination (RST button only), and buffered SD card signals for improved reliability at higher speeds."
-                        }
-                    ]
-                },
-                {
-                    "type": "gallery",
-                    "layout": "grid-2",
-                    "images": [
-                        {
-                            "src": "images/UMEB/v2.png",
-                            "alt": "Version 2 PCB",
-                            "caption": "V2: Stacked board architecture with FFC connector for complete HV/LV separation"
-                        },
-                        {
-                            "src": "images/UMEB/v2t.png",
-                            "alt": "V2 Assembled Board",
-                            "caption": "V2 assembled and tested in lab environment"
-                        }
+                    "bullets": [
+                        "Constant vibration and water exposure, where connectors were the obvious weak point",
+                        "A 48V motor bus sharing a board with 3.3V logic, with no ground loops",
+                        "GPS and CAN signals routed through a very electrically noisy environment"
                     ]
                 },
                 {
                     "type": "technical",
-                    "heading": "V3: Rigid-Flex Integration",
+                    "heading": "Three Revisions",
                     "content": "",
-                    "subsections": [
-                        {
-                            "heading": "Final Design Achievements",
-                            "content": "The final iteration achieved professional-grade reliability through rigid-flex PCB construction eliminating two failure points from connectors while providing superior vibration resistance, complete galvanic isolation between HV and LV sections, 40% more compact footprint, enhanced CAN signal integrity through controlled impedance routing and proper termination, strategic ground plane cutouts under switching regulators to reduce EMI, backup SD card pin header for external reading during diagnostics, and BJT-based LED drivers to protect GPIO pins from overcurrent conditions."
-                        }
+                    "bullets": [
+                        "<strong>V1:</strong> two-layer board, M12 marine connectors, DPDT relay for HV contactor control, SD card logging, basic HV/LV separation",
+                        "<strong>V2:</strong> split HV and LV onto stacked boards joined by FFC, buffered SD card signals for reliability at speed, series resistor on the crystal for stability",
+                        "<strong>V3:</strong> rigid-flex construction removing two connector failure points, full galvanic isolation, 40% smaller, ground-plane cutouts under switching regulators, BJT LED drivers protecting the GPIO"
                     ]
                 },
                 {
@@ -416,42 +355,61 @@
                     "layout": "grid-3",
                     "images": [
                         {
+                            "src": "images/UMEB/v1.png",
+                            "alt": "Version 1 PCB",
+                            "caption": "V1: two-layer, M12 connectors, DPDT relay"
+                        },
+                        {
+                            "src": "images/UMEB/v2.png",
+                            "alt": "Version 2 PCB",
+                            "caption": "V2: stacked boards, FFC link, full HV/LV split"
+                        },
+                        {
                             "src": "images/UMEB/iso-cock.png",
                             "alt": "V3 3D Rendering",
-                            "caption": "3D model showing rigid-flex construction with integrated HV/LV isolation"
+                            "caption": "V3: rigid-flex with integrated isolation"
+                        }
+                    ]
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-2",
+                    "images": [
+                        {
+                            "src": "images/UMEB/v1a.jpg",
+                            "alt": "V1 assembled board",
+                            "caption": "V1 assembled and bench-tested"
                         },
+                        {
+                            "src": "images/UMEB/v2t.png",
+                            "alt": "V2 assembled board",
+                            "caption": "V2 assembled and bench-tested"
+                        }
+                    ]
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-2",
+                    "images": [
                         {
                             "src": "images/UMEB/view1.png",
                             "alt": "V3 Assembled Board",
-                            "caption": "V3 final production board with rigid-flex PCB - 40% more compact than V2"
+                            "caption": "V3 production board"
                         },
                         {
                             "src": "images/UMEB/view2.png",
                             "alt": "V3 Assembled Board",
-                            "caption": "V3 final production board with rigid-flex PCB - 40% more compact than V2"
+                            "caption": "V3 production board, 40% more compact than V2"
                         }
                     ]
                 },
                 {
                     "type": "technical",
-                    "heading": "Telemetry Board Design",
-                    "content": "Collaborated on the telemetry board design, which required precise RF engineering for GPS functionality and robust industrial communication protocols. Contributed to critical signal integrity decisions for the RF and communication subsystems.",
-                    "subsections": [
-                        {
-                            "heading": "GPS Antenna Routing",
-                            "content": "Assisted in implementing controlled impedance routing (50Ω) for the GPS antenna trace using microstrip line calculations. The trace geometry was carefully calculated to maintain characteristic impedance matching between the GPS module and antenna connector, minimizing signal reflections and maximizing sensitivity. Load termination was added at the antenna end to prevent standing waves."
-                        }
-                    ]
-                },
-                {
-                    "type": "technical",
-                    "heading": "CAN Bus Signal Integrity",
+                    "heading": "Telemetry Board",
                     "content": "",
-                    "subsections": [
-                        {
-                            "heading": "Robust Communication Design",
-                            "content": "Contributed to the design of differential CAN bus traces with impedance matching (120Ω differential) and optocoupler isolation to protect the microcontroller from ground potential differences and electrical transients. Strategic component placement kept CANL/CANH traces away from noisy switching power supplies and other interference sources. Bus termination with 120Ω resistor ensured proper signal integrity."
-                        }
+                    "bullets": [
+                        "50Ω microstrip GPS antenna trace with load termination, impedance matched from module to connector to kill reflections",
+                        "120Ω differential CAN with optocoupler isolation, placed away from switching supplies"
                     ]
                 },
                 {
@@ -461,14 +419,14 @@
                         {
                             "src": "images/UMEB/telem.png",
                             "alt": "Telemetry Board",
-                            "caption": "Telemetry board featuring GPS module with impedance-matched antenna trace and optocoupled CAN bus interface"
+                            "caption": "Telemetry board: impedance-matched GPS antenna trace and optocoupled CAN"
                         }
                     ]
                 },
                 {
                     "type": "results",
-                    "heading": "Results & Key Improvements",
-                    "content": "Through three design iterations, the system achieved production-ready reliability for demanding racing environments. Each version addressed specific failure modes and performance limitations discovered through rigorous testing.",
+                    "heading": "Results",
+                    "content": "",
                     "metrics": [
                         {
                             "value": "3",
@@ -480,19 +438,14 @@
                         },
                         {
                             "value": "10+",
-                            "label": "End users satisfied"
+                            "label": "End users"
                         }
                     ]
                 },
                 {
                     "type": "learnings",
-                    "heading": "Key Learnings",
-                    "content": "This project reinforced the importance of iterative design in high-reliability applications. The transition from V1 to V2 taught me that physical separation of HV/LV circuits provides far better isolation than simple PCB layout techniques. Moving to rigid-flex in V3 demonstrated that investing in advanced manufacturing processes can eliminate entire categories of failure modes - the cost of rigid-flex was justified by removing connector failures in high-vibration environments. RF design requires meticulous attention to transmission line theory; the GPS antenna routing showed that even small impedance mismatches significantly degrade performance. Finally, strategic ground plane management around switching regulators proved essential for EMI reduction - the cutouts under inductors reduced radiated emissions measurably. If given more time, I would implement a fourth iteration with integrated power monitoring on each rail and add redundant SD card storage with automatic failover for critical race data logging."
-                },
-                {
-                    "type": "overview",
-                    "heading": "To Be Continued...",
-                    "content": "The project is currently in the assembly and enclosure design phase. I'm designing a custom case to house the rigid-flex cockpit board and telemetry system, ensuring proper mechanical protection while maintaining access for debugging and field servicing. PCB assembly is underway with careful attention to component placement and soldering quality for the rigid-flex construction. Stay tuned for updates on the final integrated system and on-water testing results."
+                    "heading": "Takeaway",
+                    "content": "Physically separating HV and LV beat any amount of clever layout on a shared board, and moving to rigid-flex removed an entire category of failure (connectors shaking loose) for a cost the vibration environment easily justified. Currently in assembly and enclosure design, with on-water testing next."
                 }
             ]
         },
@@ -502,8 +455,8 @@
             "title": "Supercapacitor Power Module",
             "category": "Electrical",
             "date": "In Progress",
-            "subtitle": "Smart power assist module for a high-agility infantry robot, developed under Michigan Advanced Robotics Competition",
-            "description": "Supercapacitor-based power module providing burst energy delivery for rapid maneuvers in competitive robotics. Designed for high peak current demand with smart charge/discharge control.",
+            "subtitle": "Burst power assist for a high-agility competition robot",
+            "description": "Supercapacitor module that buffers peak current for hard acceleration so the battery doesn't sag. Built as captain of a team I co-founded.",
             "thumbnail": "images/MARC/SuperCap v1 assembled.png",
             "tags": [
                 "Supercapacitors",
@@ -526,12 +479,28 @@
                 {
                     "type": "overview",
                     "heading": "Overview",
-                    "content": "As captain and co-founder of Michigan Advanced Robotics Competition (MARC), I'm leading the development of a Supercapacitor Power Module designed to provide intelligent burst power assist for a high-agility infantry robot. Infantry robots demand extreme power in short windows — hard acceleration, rapid direction changes, and aggressive maneuvers all create peak current draws that a battery alone handles poorly. The module sits between the battery and drive system, absorbing charge during low-demand phases and dumping it during peak loads to keep the robot fast and responsive without stressing the primary power source."
+                    "content": "As captain and co-founder of Michigan Advanced Robotics Competition, I'm leading a supercapacitor module that sits between the battery and the drive system. It charges during low-demand phases and dumps current during hard acceleration and direction changes, keeping the robot responsive without hammering the battery."
                 },
                 {
                     "type": "problem",
-                    "heading": "Problem & Constraints",
-                    "content": "Lithium batteries are energy-dense but have limited peak current capability — pushing them hard accelerates degradation and causes voltage sag that slows the robot at the worst possible moment. A competitive infantry robot needs repeatable, high-current bursts throughout a match without thermal runaway or brownouts. The module had to be compact enough to fit within the robot's weight and space budget, integrate cleanly with the existing power architecture, and be robust enough to survive the mechanical shock of combat."
+                    "heading": "The Challenge",
+                    "content": "",
+                    "bullets": [
+                        "Lithium packs sag under peak current, so the robot slows exactly when it shouldn't",
+                        "Repeated high-current bursts across a full match, without thermal runaway or brownouts",
+                        "Must fit the robot's weight and space budget and survive combat shock"
+                    ]
+                },
+                {
+                    "type": "technical",
+                    "heading": "Approach",
+                    "content": "",
+                    "bullets": [
+                        "Supercapacitor bank managed by a bidirectional DC-DC converter, gated on bus voltage and current demand",
+                        "STM32 governs charge/discharge logic and drives MOSFETs for reverse-current blocking",
+                        "Slow-start on the fused, regulated input to prevent inrush at high dV",
+                        "Cell balancing keeps voltages even across the bank to prevent premature degradation"
+                    ]
                 },
                 {
                     "type": "gallery",
@@ -540,29 +509,24 @@
                         {
                             "src": "images/MARC/SuperCap v1 layout.png",
                             "alt": "Version 1 PCB",
-                            "caption": "Fused + Regulated Input (Slow start to prevent inrush current @ high dV), Super Cap Array health monitor and regulated output. STM32 controlled MOSFETs for reverse current blocking"
+                            "caption": "V1 layout: fused regulated input, cap health monitor, regulated output"
                         },
                         {
                             "src": "images/MARC/super_capacitor.png",
                             "alt": "V1 3D Board",
-                            "caption": "V1 SuperCap Board 3D view"
+                            "caption": "V1 3D view"
                         },
                         {
                             "src": "images/MARC/SuperCap v1 assembled.png",
                             "alt": "V1 Assembled Board",
-                            "caption": "V1 SuperCap Final Assembled"
+                            "caption": "V1 assembled"
                         }
                     ]
                 },
                 {
-                    "type": "overview",
-                    "heading": "Technical Approach",
-                    "content": "Supercapacitors (ultracapacitors) are the right tool here — they can charge and discharge orders of magnitude faster than batteries and tolerate far more charge cycles. The module uses a bank of supercapacitors managed by a bidirectional DC-DC converter, which controls when energy flows in and out based on bus voltage and current demand. A microcontroller monitors system state and governs the charge/discharge logic, ensuring the caps are primed before high-demand events and protected from overvoltage. Balancing circuits keep individual cell voltages even across the bank to prevent premature cell degradation."
-                },
-                {
                     "type": "results",
                     "heading": "Status",
-                    "content": "Project is currently in active testing and development.",
+                    "content": "In active testing and development.",
                     "metrics": [
                         {
                             "value": "$12K+",
@@ -582,12 +546,12 @@
         },
         {
             "id": "clearpath",
-            "number": "05",
+            "number": "08",
             "title": "Clarus",
             "category": "Software",
             "date": "June 2026",
-            "subtitle": "Profile-aware routing for large vehicles, built on measured LiDAR pavement reality — not a restriction database",
-            "description": "2nd place ($3,000) out of 12 teams at the CYVL Hackathon. 6-hour MVP routing large vehicles through Somerville, MA using CYVL LiDAR data. Per-turn swept-path feasibility checks block physically impossible turns and reroute automatically.",
+            "subtitle": "Routing for large vehicles built on measured LiDAR reality, not a restriction database",
+            "description": "2nd place ($3,000) at the CYVL Hackathon. A 6-hour solo build that checks whether a fire truck can physically clear each turn, and reroutes when it can't.",
             "github": "https://github.com/yuankev-sudo/CYVL-Hackathon",
             "thumbnail": "images/CYVL-Hack/Main Web Page.png",
             "tags": [
@@ -614,7 +578,34 @@
                 {
                     "type": "overview",
                     "heading": "Overview",
-                    "content": "Built Clarus at the CYVL Hackathon in 6 hours — a routing tool that solves a problem existing truck routers (Google Maps, Waze, Route4Me) fundamentally can't: they route off reported restriction databases, not measured road reality. Clarus routes off CYVL LiDAR data for Somerville, MA, checking per-turn swept-path feasibility against real intersection geometry and LiDAR-derived obstacles like trees and utility poles. A fire truck that physically can't clear a tight corner gets flagged and rerouted — before it gets there."
+                    "content": "Google Maps, Waze, and Route4Me route trucks off reported restriction databases, not measured road reality. Clarus routes off CYVL LiDAR data for Somerville, MA, checking each turn's swept path against real intersection geometry and obstacles like trees and utility poles, then rerouting around turns the vehicle physically cannot make. Built solo in six hours; 2nd of 12 teams."
+                },
+                {
+                    "type": "video",
+                    "heading": "Demo",
+                    "caption": "Routing a fire truck through Somerville. The Large Vehicle profile flags a failing intersection and reroutes automatically.",
+                    "youtube": "CS9W8MGKsOE"
+                },
+                {
+                    "type": "problem",
+                    "heading": "The Challenge",
+                    "content": "",
+                    "bullets": [
+                        "Restriction databases carry wrong lane widths and missing turn restrictions, so GPS confidently sends a ladder truck into a corner it can't clear",
+                        "No off-the-shelf tool checks a specific vehicle's swept path against a specific intersection's real geometry",
+                        "Everything had to be derived: turning radii from AASHTO dimensions, road widths from centerlines, clearance from LiDAR asset positions"
+                    ]
+                },
+                {
+                    "type": "technical",
+                    "heading": "How It Works",
+                    "content": "",
+                    "bullets": [
+                        "<strong>Road graph:</strong> 1,535 nodes and 2,160 edges from CYVL centerlines, with 890 segments joined to PCI pavement scores",
+                        "<strong>Turn check:</strong> computes the deviation angle and available radius at every intersection, compares against the vehicle's outer swing radius, returns pass / tight / fail with a plain-English reason",
+                        "<strong>Three profiles</strong> on one Dijkstra core: Fastest (distance), Smoothest (PCI penalty, for ambulances), Large Vehicle (blocks failing intersections, then reroutes)",
+                        "<strong>Swept path:</strong> via Autodesk APS, with a Shapely fallback that stays functional end-to-end so development never blocked on the API"
+                    ]
                 },
                 {
                     "type": "gallery",
@@ -623,51 +614,17 @@
                         {
                             "src": "images/CYVL-Hack/Main Web Page.png",
                             "alt": "Clarus routing UI",
-                            "caption": "Clarus UI — three routing profiles with live comparison. Orange markers flag tight/fail intersections along the Large Vehicle route."
+                            "caption": "Three routing profiles compared live, with orange markers flagging tight or failing intersections"
                         },
                         {
                             "src": "images/CYVL-Hack/Lidar Demo Segment.png",
                             "alt": "Route segment with LiDAR clearance check",
-                            "caption": "Route segment showing a 7.25 m measured overhead clearance from CYVL LiDAR data."
+                            "caption": "Segment with 7.25 m measured overhead clearance"
                         },
                         {
                             "src": "images/CYVL-Hack/Lidar Point Cloud .png",
                             "alt": "LiDAR point cloud overhead clearance",
-                            "caption": "LiDAR point cloud of the Mystic Ave viaduct — 7.25 m measured clearance, all four AASHTO design vehicles pass."
-                        }
-                    ]
-                },
-                {
-                    "type": "video",
-                    "heading": "Demo",
-                    "caption": "Live demo — routing a fire truck through Somerville, MA. The Large Vehicle profile detects a failing intersection, flags it with an orange marker, and automatically reroutes.",
-                    "youtube": "CS9W8MGKsOE"
-                },
-                {
-                    "type": "problem",
-                    "heading": "Problem & Constraints",
-                    "content": "Large vehicle routing is a solved problem only on paper. Existing tools rely on manually-maintained restriction databases — wrong lane widths, missing turn restrictions, no awareness of encroaching objects. The result: GPS systems confidently route ambulances down roads with poor pavement (critical for patient comfort) or send a fire ladder truck into a turn its body can't physically clear. The core challenge was building a turn feasibility check from first principles — no off-the-shelf tool exists that computes whether a specific vehicle's swept path fits a specific intersection's real geometry. Everything had to be derived: turning radii from AASHTO vehicle dimensions, road width estimates from centerline data, obstacle clearance from above-ground asset positions."
-                },
-                {
-                    "type": "technical",
-                    "heading": "Architecture",
-                    "content": "The system has four distinct layers, each independently runnable as a demo.",
-                    "subsections": [
-                        {
-                            "heading": "Road Graph (routing/cyvl_graph.py)",
-                            "content": "Built a weighted directed graph from CYVL Somerville centerline shapefiles — 1,535 nodes, 2,160 edges, with 890 segments spatially joined to PCI pavement scores via nearest-midpoint matching. Dijkstra runs with three modes: pure distance (Fastest), PCI penalty factor (Smoothest/ambulance), and blocked intersection sets (Large Vehicle). The graph builds once on startup and is cached for the process lifetime."
-                        },
-                        {
-                            "heading": "Turn Feasibility (routing/cyvl_graph.py + geometry/turning.py)",
-                            "content": "For each intersection node (degree ≥ 3) along the naive route, the system computes the turn deviation angle using correctly oriented polyline vectors, estimates available turning radius from road width and turn angle geometry, then compares it to the vehicle's required outer swing radius. LiDAR above-ground assets (trees, utility poles) can further reduce usable corner radius. Output per intersection: pass / tight / fail with a plain-English explanation of the constraint — road widths, margin in feet, nearest obstacle."
-                        },
-                        {
-                            "heading": "Routing Profiles",
-                            "content": "Three profiles share the same Dijkstra core. Fastest minimizes distance only. Smoothest adds a PCI penalty factor (configurable metres per PCI point below 100), routing ambulances around rough pavement. Large Vehicle runs a pre-pass on the naive route to identify FAIL intersections, blocks them as impassable nodes, then rereroutes — the before/after comparison is the core demo."
-                        },
-                        {
-                            "heading": "Autodesk APS Integration",
-                            "content": "Integrated Autodesk Platform Services as an optional swept-path backend (sweptpath/autodesk_backend.py), with a Shapely geometric fallback (sweptpath/shapely_backend.py) that stays fully functional end-to-end at all times. The fallback uses vehicle dimensions from AASHTO design standards (WB-67 tractor-trailer, SU-30 single-unit truck, fire ladder, 40ft transit bus) to compute outer swing radii directly."
+                            "caption": "Point cloud of the Mystic Ave viaduct, where all four AASHTO design vehicles pass"
                         }
                     ]
                 },
@@ -686,14 +643,493 @@
                         },
                         {
                             "value": "6 hrs",
-                            "label": "End-to-end build time"
+                            "label": "End-to-end build"
                         }
                     ]
                 },
                 {
                     "type": "learnings",
-                    "heading": "Key Learnings",
-                    "content": "The biggest insight was how much a restriction-database approach misses. Pavement condition and physical turn geometry are both properties that must be measured — they can't be crowd-sourced or inferred from map data alone. CYVL's LiDAR pipeline is the rare case where the underlying data quality actually enables a new class of routing decisions. The turn feasibility geometry was the hardest part to get right: correctly orienting both entry and exit polyline vectors relative to the intersection node required careful attention to direction, and small bugs produced nonsensical turn angles. The APS integration also showed a real pattern for layered backends — having the Shapely fallback as a guaranteed-working baseline let development proceed without ever being blocked on API availability."
+                    "heading": "Takeaway",
+                    "content": "Pavement condition and turn geometry are properties you have to measure, since they can't be crowd-sourced or inferred from map data. The turn feasibility math was the hardest part: correctly orienting entry and exit polyline vectors relative to the intersection node, where small direction bugs produced nonsensical angles."
+                }
+            ]
+        },
+        {
+            "id": "laminar-ipc",
+            "number": "05",
+            "title": "Next-Gen Industrial Gateway",
+            "category": "Mechanical",
+            "date": "Aug 2026",
+            "subtitle": "TODO: one line on what the IPC gateway is and who uses it",
+            "description": "TODO: two lines for the project card. Industrial PC gateway: enclosure design, machining, assembly, and thermal validation over a summer at Laminar.",
+            "thumbnail": "images/Laminar-IPC/assembled-display.jpg",
+            "tags": [
+                "Enclosure Design",
+                "CNC",
+                "Thermal Testing",
+                "SolidWorks"
+            ],
+            "meta": {
+                "role": "Hardware Engineering Intern",
+                "timeline": "4 months",
+                "teamSize": "TODO"
+            },
+            "techTags": [
+                "SolidWorks",
+                "CNC Machining",
+                "Thermal Validation",
+                "TODO"
+            ],
+            "sections": [
+                {
+                    "type": "overview",
+                    "heading": "Overview",
+                    "content": "TODO: what the IPC V1 gateway is, why Laminar needed a next-gen version, and what you owned. Scoped in May, designed and fabricated through June, assembled and tested in July."
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-3",
+                    "images": [
+                        {
+                            "src": "images/Laminar-IPC/enclosure-cad-closed.png",
+                            "alt": "Enclosure CAD, closed",
+                            "caption": "TODO caption"
+                        },
+                        {
+                            "src": "images/Laminar-IPC/enclosure-cad-open.png",
+                            "alt": "Enclosure CAD, open",
+                            "caption": "TODO caption"
+                        },
+                        {
+                            "src": "images/Laminar-IPC/enclosure-cad-internal.png",
+                            "alt": "Enclosure CAD, internals",
+                            "caption": "TODO caption"
+                        }
+                    ]
+                },
+                {
+                    "type": "problem",
+                    "heading": "The Challenge",
+                    "content": "",
+                    "bullets": [
+                        "TODO: constraint one (sealing / ingress rating?)",
+                        "TODO: constraint two (thermal budget in a sealed enclosure?)",
+                        "TODO: constraint three (connector layout, serviceability?)"
+                    ]
+                },
+                {
+                    "type": "technical",
+                    "heading": "Approach",
+                    "content": "",
+                    "bullets": [
+                        "<strong>TODO:</strong> enclosure design decision",
+                        "<strong>TODO:</strong> machining and tolerance decision",
+                        "<strong>TODO:</strong> thermal management decision"
+                    ]
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-2",
+                    "images": [
+                        {
+                            "src": "images/Laminar-IPC/mounting-plate.png",
+                            "alt": "Mounting plate drawing",
+                            "caption": "TODO caption"
+                        },
+                        {
+                            "src": "images/Laminar-IPC/cnc-machining.jpg",
+                            "alt": "CNC machining the plate",
+                            "caption": "TODO caption"
+                        }
+                    ]
+                },
+                {
+                    "type": "video",
+                    "heading": "Fabrication",
+                    "content": "",
+                    "caption": "TODO: caption for the CNC milling clip",
+                    "src": "images/Laminar-IPC/cnc-milling.mp4",
+                    "format": "mp4"
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-3",
+                    "images": [
+                        {
+                            "src": "images/Laminar-IPC/enclosure-connectors.jpg",
+                            "alt": "Enclosure with connectors",
+                            "caption": "TODO caption"
+                        },
+                        {
+                            "src": "images/Laminar-IPC/bench-unit.jpg",
+                            "alt": "Unit on the bench",
+                            "caption": "TODO caption"
+                        },
+                        {
+                            "src": "images/Laminar-IPC/assembled-display.jpg",
+                            "alt": "Assembled unit with display",
+                            "caption": "TODO caption"
+                        }
+                    ]
+                },
+                {
+                    "type": "overview",
+                    "heading": "Thermal Validation",
+                    "content": "TODO: describe the burn-in runs. The two plots below are the 60-hour and 120-hour system temperature logs."
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-2",
+                    "images": [
+                        {
+                            "src": "images/Laminar-IPC/thermal-60h.png",
+                            "alt": "60-hour thermal log",
+                            "caption": "TODO: 60h run, peak 94.0 C"
+                        },
+                        {
+                            "src": "images/Laminar-IPC/thermal-120h.png",
+                            "alt": "120-hour thermal log",
+                            "caption": "TODO: 120h run, peak 81.0 C"
+                        }
+                    ]
+                },
+                {
+                    "type": "results",
+                    "heading": "Results",
+                    "content": "",
+                    "metrics": [
+                        {
+                            "value": "TODO",
+                            "label": "TODO"
+                        },
+                        {
+                            "value": "TODO",
+                            "label": "TODO"
+                        },
+                        {
+                            "value": "TODO",
+                            "label": "TODO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "laminar-led-calibration",
+            "number": "06",
+            "title": "LED Calibration Station",
+            "category": "Electrical",
+            "date": "Aug 2026",
+            "subtitle": "TODO: one line on what the calibration station does",
+            "description": "TODO: two lines for the project card. Spectral LED calibration station: board design across three revisions, optical fixture, and calibration firmware.",
+            "thumbnail": "images/Laminar-LED/fixture-lit.jpg",
+            "tags": [
+                "KiCad",
+                "Spectral Sensing",
+                "Firmware",
+                "Optical Test"
+            ],
+            "meta": {
+                "role": "Hardware Engineering Intern",
+                "timeline": "3 months",
+                "teamSize": "TODO"
+            },
+            "techTags": [
+                "KiCad",
+                "AS7265x",
+                "Firmware",
+                "Optical Fixture",
+                "TODO"
+            ],
+            "sections": [
+                {
+                    "type": "overview",
+                    "heading": "Overview",
+                    "content": "TODO: what the calibration station is for, why per-unit LED calibration matters, and what you built. Board design started in June, firmware ran through August."
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-3",
+                    "images": [
+                        {
+                            "src": "images/Laminar-LED/cal-board-v1.png",
+                            "alt": "Calibration board rev 1",
+                            "caption": "TODO: rev 1"
+                        },
+                        {
+                            "src": "images/Laminar-LED/cal-board-v2.png",
+                            "alt": "Calibration board rev 2",
+                            "caption": "TODO: rev 2"
+                        },
+                        {
+                            "src": "images/Laminar-LED/cal-board-v3.png",
+                            "alt": "Calibration board rev 3",
+                            "caption": "TODO: rev 3"
+                        }
+                    ]
+                },
+                {
+                    "type": "problem",
+                    "heading": "The Challenge",
+                    "content": "",
+                    "bullets": [
+                        "TODO: constraint one (unit-to-unit LED variation?)",
+                        "TODO: constraint two (repeatable optical coupling in the fixture?)",
+                        "TODO: constraint three (throughput on the line?)"
+                    ]
+                },
+                {
+                    "type": "technical",
+                    "heading": "Approach",
+                    "content": "",
+                    "bullets": [
+                        "<strong>TODO:</strong> board architecture decision",
+                        "<strong>TODO:</strong> spectral sensor choice and placement",
+                        "<strong>TODO:</strong> calibration firmware routine"
+                    ]
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-3",
+                    "images": [
+                        {
+                            "src": "images/Laminar-LED/carrier-board-layout.png",
+                            "alt": "Carrier board layout",
+                            "caption": "TODO caption"
+                        },
+                        {
+                            "src": "images/Laminar-LED/spectral-sensor-board.png",
+                            "alt": "Spectral sensor board",
+                            "caption": "TODO: AS7265x spectral triad"
+                        },
+                        {
+                            "src": "images/Laminar-LED/station-cad.png",
+                            "alt": "Station CAD",
+                            "caption": "TODO caption"
+                        }
+                    ]
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-3",
+                    "images": [
+                        {
+                            "src": "images/Laminar-LED/assembled-boards.jpg",
+                            "alt": "Assembled boards",
+                            "caption": "TODO caption"
+                        },
+                        {
+                            "src": "images/Laminar-LED/ring-board.jpg",
+                            "alt": "Ring board",
+                            "caption": "TODO caption"
+                        },
+                        {
+                            "src": "images/Laminar-LED/pcb-batch.jpg",
+                            "alt": "Batch of assembled boards",
+                            "caption": "TODO caption"
+                        }
+                    ]
+                },
+                {
+                    "type": "overview",
+                    "heading": "Fixture & Bring-Up",
+                    "content": "TODO: describe the optical fixture iterations and bench bring-up."
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-3",
+                    "images": [
+                        {
+                            "src": "images/Laminar-LED/fixture-iterations.jpg",
+                            "alt": "Fixture iterations",
+                            "caption": "TODO caption"
+                        },
+                        {
+                            "src": "images/Laminar-LED/boards-and-fixture.jpg",
+                            "alt": "Boards with fixture",
+                            "caption": "TODO caption"
+                        },
+                        {
+                            "src": "images/Laminar-LED/fixture-lit.jpg",
+                            "alt": "Fixture under test",
+                            "caption": "TODO caption"
+                        }
+                    ]
+                },
+                {
+                    "type": "gallery",
+                    "layout": "side-by-side",
+                    "images": [
+                        {
+                            "src": "images/Laminar-LED/optical-test.jpg",
+                            "alt": "Optical bench test",
+                            "caption": "TODO caption"
+                        }
+                    ]
+                },
+                {
+                    "type": "results",
+                    "heading": "Results",
+                    "content": "",
+                    "metrics": [
+                        {
+                            "value": "3",
+                            "label": "Board revisions"
+                        },
+                        {
+                            "value": "TODO",
+                            "label": "TODO"
+                        },
+                        {
+                            "value": "TODO",
+                            "label": "TODO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "laminar-nir-driver",
+            "number": "07",
+            "title": "NIR Bulb Backup Circuit",
+            "category": "Electrical",
+            "date": "Aug 2026",
+            "subtitle": "TODO: one line on what the backup circuit does",
+            "description": "TODO: two lines for the project card. Analog backup drive circuit for an NIR bulb, taken from hand analysis through LTspice to bench validation.",
+            "thumbnail": "images/Laminar-NIR/bench-supply.jpg",
+            "tags": [
+                "Analog Design",
+                "LTspice",
+                "MOSFET",
+                "Bench Validation"
+            ],
+            "meta": {
+                "role": "Hardware Engineering Intern",
+                "timeline": "1 month",
+                "teamSize": "Solo"
+            },
+            "techTags": [
+                "LTspice",
+                "Op-Amp",
+                "Si7336ADP",
+                "Bench Validation"
+            ],
+            "sections": [
+                {
+                    "type": "overview",
+                    "heading": "Overview",
+                    "content": "TODO: what the NIR bulb is used for, why it needed a backup drive path, and what you designed. Built in August."
+                },
+                {
+                    "type": "problem",
+                    "heading": "The Challenge",
+                    "content": "",
+                    "bullets": [
+                        "TODO: constraint one (what fails without a backup path?)",
+                        "TODO: constraint two (drive current / thermal limits?)",
+                        "TODO: constraint three (must not interfere with the primary path?)"
+                    ]
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-2",
+                    "images": [
+                        {
+                            "src": "images/Laminar-NIR/circuit-sketch.jpg",
+                            "alt": "Circuit sketch",
+                            "caption": "TODO caption"
+                        },
+                        {
+                            "src": "images/Laminar-NIR/whiteboard-analysis.jpg",
+                            "alt": "Whiteboard analysis",
+                            "caption": "TODO: hand derivation of the operating point"
+                        }
+                    ]
+                },
+                {
+                    "type": "technical",
+                    "heading": "Approach",
+                    "content": "",
+                    "bullets": [
+                        "<strong>TODO:</strong> topology choice (op-amp feedback around a MOSFET pass element)",
+                        "<strong>TODO:</strong> what the hand analysis established before simulating",
+                        "<strong>TODO:</strong> what LTspice confirmed or changed"
+                    ]
+                },
+                {
+                    "type": "gallery",
+                    "layout": "side-by-side",
+                    "images": [
+                        {
+                            "src": "images/Laminar-NIR/ltspice-sim.png",
+                            "alt": "LTspice simulation",
+                            "caption": "TODO: LTspice transient sim"
+                        }
+                    ]
+                },
+                {
+                    "type": "overview",
+                    "heading": "Bench Validation",
+                    "content": "TODO: describe the bench bring-up on the Keysight supply."
+                },
+                {
+                    "type": "video",
+                    "heading": "Bench Demo",
+                    "content": "",
+                    "caption": "TODO: caption for the bench demo clip",
+                    "src": "images/Laminar-NIR/bench-demo.mp4",
+                    "format": "mp4"
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-3",
+                    "images": [
+                        {
+                            "src": "images/Laminar-NIR/bench-supply.jpg",
+                            "alt": "Bench supply test",
+                            "caption": "TODO caption"
+                        },
+                        {
+                            "src": "images/Laminar-NIR/bench-switching.jpg",
+                            "alt": "Switching test",
+                            "caption": "TODO caption"
+                        },
+                        {
+                            "src": "images/Laminar-NIR/driver-board.jpg",
+                            "alt": "Driver board",
+                            "caption": "TODO caption"
+                        }
+                    ]
+                },
+                {
+                    "type": "gallery",
+                    "layout": "side-by-side",
+                    "images": [
+                        {
+                            "src": "images/Laminar-NIR/scope-capture.jpg",
+                            "alt": "Scope capture",
+                            "caption": "TODO caption"
+                        }
+                    ]
+                },
+                {
+                    "type": "results",
+                    "heading": "Results",
+                    "content": "",
+                    "metrics": [
+                        {
+                            "value": "TODO",
+                            "label": "TODO"
+                        },
+                        {
+                            "value": "TODO",
+                            "label": "TODO"
+                        },
+                        {
+                            "value": "TODO",
+                            "label": "TODO"
+                        }
+                    ]
                 }
             ]
         }

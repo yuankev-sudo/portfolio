@@ -258,6 +258,30 @@ header nav a:hover {
     margin-bottom: 1.5rem;
 }
 
+/* Scannable point lists inside content sections.
+   No markers or indent: each point reads as its own separated line. */
+.content-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+}
+
+.content-bullets li {
+    font-size: 1rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 1.4rem;
+}
+
+.content-bullets li:last-child {
+    margin-bottom: 0;
+}
+
+.content-bullets li strong {
+    font-weight: 500;
+    color: var(--text);
+}
+
 /* Image Galleries */
 .image-gallery {
     margin-bottom: 6rem;

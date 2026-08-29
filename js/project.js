@@ -76,6 +76,24 @@ function generateProjectContent(project, allProjects) {
     return html;
 }
 
+// Render a section body: optional intro paragraph plus an optional bullet list.
+// Empty content is skipped so sections that are bullets-only don't leave a blank gap.
+function renderBody(section) {
+    let html = '';
+
+    if (section.content) {
+        html += `<p>${section.content}</p>`;
+    }
+
+    if (section.bullets && section.bullets.length > 0) {
+        html += `<ul class="content-bullets">`;
+        html += section.bullets.map(item => `<li>${item}</li>`).join('');
+        html += `</ul>`;
+    }
+
+    return html;
+}
+
 // Render individual section based on type
 function renderSection(section) {
     let html = '';
@@ -87,7 +105,7 @@ function renderSection(section) {
             html += `
                 <section class="project-content">
                     <h3 class="content-heading">${section.heading}</h3>
-                    <p>${section.content}</p>
+                    ${renderBody(section)}
                 </section>
             `;
             break;
@@ -96,13 +114,13 @@ function renderSection(section) {
             html += `
                 <section class="project-content">
                     <h3 class="content-heading">${section.heading}</h3>
-                    <p>${section.content}</p>
+                    ${renderBody(section)}
             `;
             if (section.subsections) {
                 section.subsections.forEach(sub => {
                     html += `
                         <h4 class="subsection-heading">${sub.heading}</h4>
-                        <p>${sub.content}</p>
+                        ${renderBody(sub)}
                     `;
                 });
             }
@@ -143,7 +161,7 @@ function renderSection(section) {
             html += `
                 <section class="project-content">
                     <h3 class="content-heading">${section.heading}</h3>
-                    <p>${section.content}</p>
+                    ${renderBody(section)}
             `;
             if (section.metrics) {
                 html += `<div class="results-grid">`;
