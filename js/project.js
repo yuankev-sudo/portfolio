@@ -1,3 +1,7 @@
+// Tags an element with the projects.json path it was rendered from, so the
+// inline editor can write changes back. Returns '' unless edit mode is on.
+const editAttr = (path, type = 'text') => (window.editAttr ? window.editAttr(path, type) : '');
+
 // Get project ID from URL
 function getProjectId() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -11,7 +15,8 @@ async function loadProject() {
         const data = await response.json();
         const projectId = getProjectId();
         
-        const project = data.projects.find(p => p.id === projectId);
+        const index = data.projects.findIndex(p => p.id === projectId);
+        const project = data.projects[index];
         
         if (!project) {
             document.getElementById('project-content').innerHTML = '<p>Project not found.</p>';
@@ -22,7 +27,7 @@ async function loadProject() {
         document.title = `${project.title} - Kevin Yuan`;
         
         // Generate project content
-        const content = generateProjectContent(project, data.projects);
+        const content = generateProjectContent(project, data.projects, index);
         document.getElementById('project-content').innerHTML = content;
         
     } catch (error) {
@@ -32,7 +37,8 @@ async function loadProject() {
 }
 
 // Generate project HTML content
-function generateProjectContent(project, allProjects) {
+function generateProjectContent(project, allProjects, index) {
+    const base = `projects.${index}`;
     let html = '';
     
     // Project Hero with background image
@@ -41,14 +47,14 @@ function generateProjectContent(project, allProjects) {
         <section class="project-hero" ${backgroundImage}>
             <div class="project-hero-content">
                 <div class="project-meta">
-                    <span class="meta-item">${project.meta.role}</span>
-                    <span class="meta-item">${project.meta.timeline}</span>
-                    <span class="meta-item">${project.meta.teamSize}</span>
+                    <span class="meta-item"${editAttr(`${base}.meta.role`)}>${project.meta.role}</span>
+                    <span class="meta-item"${editAttr(`${base}.meta.timeline`)}>${project.meta.timeline}</span>
+                    <span class="meta-item"${editAttr(`${base}.meta.teamSize`)}>${project.meta.teamSize}</span>
                 </div>
-                <h2>${project.title}</h2>
-                <p class="project-subtitle">${project.subtitle}</p>
+                <h2${editAttr(`${base}.title`)}>${project.title}</h2>
+                <p class="project-subtitle"${editAttr(`${base}.subtitle`)}>${project.subtitle}</p>
                 <div class="project-tech-tags">
-                    ${project.techTags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
+                    ${project.techTags.map((tag, i) => `<span class="tech-tag"${editAttr(`${base}.techTags.${i}`)}>${tag}</span>`).join('')}
                 </div>
                 ${project.github ? `<div class="project-hero-links"><a href="${project.github}" target="_blank" rel="noopener noreferrer" class="github-link">View on GitHub →</a></div>` : ''}
             </div>
@@ -57,15 +63,15 @@ function generateProjectContent(project, allProjects) {
     
     // Render sections
     if (project.sections && project.sections.length > 0) {
-        project.sections.forEach(section => {
-            html += renderSection(section);
+        project.sections.forEach((section, i) => {
+            html += renderSection(section, `${base}.sections.${i}`);
         });
     } else {
         // Default content if no sections defined
         html += `
             <section class="project-content">
                 <h3 class="content-heading">Overview</h3>
-                <p>${project.description}</p>
+                <p${editAttr(`${base}.description`, 'html')}>${project.description}</p>
             </section>
         `;
     }
@@ -78,16 +84,23 @@ function generateProjectContent(project, allProjects) {
 
 // Render a section body: optional intro paragraph plus an optional bullet list.
 // Empty content is skipped so sections that are bullets-only don't leave a blank gap.
-function renderBody(section) {
+// `path` is the section's location in projects.json, e.g. "projects.0.sections.2".
+function renderBody(section, path) {
     let html = '';
 
-    if (section.content) {
-        html += `<p>${section.content}</p>`;
+    // While editing, a field that exists in the JSON but is currently an empty
+    // string still gets rendered so there is something to click into.
+    const showEmpty = !!window.__EDIT_MODE__;
+
+    if (section.content || (showEmpty && 'content' in section)) {
+        html += `<p${editAttr(`${path}.content`, 'html')}>${section.content}</p>`;
     }
 
     if (section.bullets && section.bullets.length > 0) {
         html += `<ul class="content-bullets">`;
-        html += section.bullets.map(item => `<li>${item}</li>`).join('');
+        html += section.bullets
+            .map((item, i) => `<li${editAttr(`${path}.bullets.${i}`, 'html')}>${item}</li>`)
+            .join('');
         html += `</ul>`;
     }
 
@@ -95,7 +108,7 @@ function renderBody(section) {
 }
 
 // Render individual section based on type
-function renderSection(section) {
+function renderSection(section, path) {
     let html = '';
     
     switch(section.type) {
@@ -104,8 +117,8 @@ function renderSection(section) {
         case 'learnings':
             html += `
                 <section class="project-content">
-                    <h3 class="content-heading">${section.heading}</h3>
-                    ${renderBody(section)}
+                    <h3 class="content-heading"${editAttr(`${path}.heading`)}>${section.heading}</h3>
+                    ${renderBody(section, path)}
                 </section>
             `;
             break;
@@ -113,14 +126,15 @@ function renderSection(section) {
         case 'technical':
             html += `
                 <section class="project-content">
-                    <h3 class="content-heading">${section.heading}</h3>
-                    ${renderBody(section)}
+                    <h3 class="content-heading"${editAttr(`${path}.heading`)}>${section.heading}</h3>
+                    ${renderBody(section, path)}
             `;
             if (section.subsections) {
-                section.subsections.forEach(sub => {
+                section.subsections.forEach((sub, i) => {
+                    const subPath = `${path}.subsections.${i}`;
                     html += `
-                        <h4 class="subsection-heading">${sub.heading}</h4>
-                        ${renderBody(sub)}
+                        <h4 class="subsection-heading"${editAttr(`${subPath}.heading`)}>${sub.heading}</h4>
+                        ${renderBody(sub, subPath)}
                     `;
                 });
             }
@@ -131,7 +145,8 @@ function renderSection(section) {
             html += `<section class="image-gallery">`;
             
             html += `<div class="gallery-${section.layout}">`;
-            section.images.forEach(item => {
+            section.images.forEach((item, i) => {
+                const captionAttr = editAttr(`${path}.images.${i}.caption`);
                 if (item.type === 'video') {
                     // Render video in gallery
                     html += `
@@ -139,7 +154,7 @@ function renderSection(section) {
                             <video playsinline muted loop>
                                 <source src="${item.src}" type="video/${item.format || 'mp4'}">
                             </video>
-                            <figcaption>${item.caption}</figcaption>
+                            <figcaption${captionAttr}>${item.caption}</figcaption>
                         </figure>
                     `;
                 } else {
@@ -147,7 +162,7 @@ function renderSection(section) {
                     html += `
                         <figure class="gallery-image">
                             <img src="${item.src}" alt="${item.alt}">
-                            <figcaption>${item.caption}</figcaption>
+                            <figcaption${captionAttr}>${item.caption}</figcaption>
                         </figure>
                     `;
                 }
@@ -160,16 +175,16 @@ function renderSection(section) {
         case 'results':
             html += `
                 <section class="project-content">
-                    <h3 class="content-heading">${section.heading}</h3>
-                    ${renderBody(section)}
+                    <h3 class="content-heading"${editAttr(`${path}.heading`)}>${section.heading}</h3>
+                    ${renderBody(section, path)}
             `;
             if (section.metrics) {
                 html += `<div class="results-grid">`;
-                section.metrics.forEach(metric => {
+                section.metrics.forEach((metric, i) => {
                     html += `
                         <div class="result-item">
-                            <div class="result-number">${metric.value}</div>
-                            <div class="result-label">${metric.label}</div>
+                            <div class="result-number"${editAttr(`${path}.metrics.${i}.value`)}>${metric.value}</div>
+                            <div class="result-label"${editAttr(`${path}.metrics.${i}.label`)}>${metric.label}</div>
                         </div>
                     `;
                 });
@@ -183,7 +198,7 @@ function renderSection(section) {
                 <section class="full-width-image">
                     <figure>
                         <img src="${section.src}" alt="${section.alt}">
-                        <figcaption>${section.caption}</figcaption>
+                        <figcaption${editAttr(`${path}.caption`)}>${section.caption}</figcaption>
                     </figure>
                 </section>
             `;
@@ -193,23 +208,23 @@ function renderSection(section) {
             if (section.youtube) {
                 html += `
                     <section class="project-content">
-                        ${section.heading ? `<h3 class="content-heading">${section.heading}</h3>` : ''}
+                        ${section.heading ? `<h3 class="content-heading"${editAttr(`${path}.heading`)}>${section.heading}</h3>` : ''}
                         <div class="video-container youtube-embed">
                             <iframe src="https://www.youtube.com/embed/${section.youtube}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        ${section.caption ? `<figcaption class="video-caption">${section.caption}</figcaption>` : ''}
+                        ${section.caption ? `<figcaption class="video-caption"${editAttr(`${path}.caption`)}>${section.caption}</figcaption>` : ''}
                     </section>
                 `;
             } else {
                 html += `
                     <section class="project-content">
-                        ${section.heading ? `<h3 class="content-heading">${section.heading}</h3>` : ''}
+                        ${section.heading ? `<h3 class="content-heading"${editAttr(`${path}.heading`)}>${section.heading}</h3>` : ''}
                         <div class="video-container">
                             <video controls playsinline muted loop>
                                 <source src="${section.src}" type="video/${section.format || 'mp4'}">
                             </video>
                         </div>
-                        ${section.caption ? `<figcaption class="video-caption">${section.caption}</figcaption>` : ''}
+                        ${section.caption ? `<figcaption class="video-caption"${editAttr(`${path}.caption`)}>${section.caption}</figcaption>` : ''}
                     </section>
                 `;
             }

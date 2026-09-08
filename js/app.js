@@ -1,8 +1,15 @@
 // Order of categories shown on the home page
 const CATEGORY_ORDER = ['Electrical', 'Mechanical', 'Software'];
 
-// Build a single project card element
-function createProjectCard(project) {
+// Tags an element with the projects.json path it was rendered from, so the
+// inline editor can write changes back. Returns '' unless edit mode is on.
+const editAttr = (path, type = 'text') => (window.editAttr ? window.editAttr(path, type) : '');
+
+// Build a single project card element.
+// `index` is the position in projects.json, used to build edit paths.
+function createProjectCard(project, index) {
+    const base = `projects.${index}`;
+
     const projectLink = document.createElement('a');
     projectLink.href = `project.html?id=${project.id}`;
     projectLink.className = 'project-link';
@@ -17,7 +24,7 @@ function createProjectCard(project) {
     }
 
     const dateHTML = project.date
-        ? `<span class="project-date">${project.date}</span>`
+        ? `<span class="project-date"${editAttr(`${base}.date`)}>${project.date}</span>`
         : '';
 
     projectDiv.innerHTML = `
@@ -25,11 +32,11 @@ function createProjectCard(project) {
             ${imageHTML}
             ${dateHTML}
         </div>
-        <div class="project-number">${project.number}</div>
-        <h4 class="project-title">${project.title}</h4>
-        <p class="project-description">${project.description}</p>
+        <div class="project-number"${editAttr(`${base}.number`)}>${project.number}</div>
+        <h4 class="project-title"${editAttr(`${base}.title`)}>${project.title}</h4>
+        <p class="project-description"${editAttr(`${base}.description`)}>${project.description}</p>
         <div class="project-tags">
-            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            ${project.tags.map((tag, i) => `<span class="tag"${editAttr(`${base}.tags.${i}`)}>${tag}</span>`).join('')}
         </div>
     `;
 
@@ -44,9 +51,12 @@ async function loadProjects() {
         const data = await response.json();
         const container = document.getElementById('projects-container');
 
-        // Group projects by category
+        // Group projects by category, remembering each project's position in
+        // the JSON file so edits can be pointed back at the right entry.
         const grouped = {};
-        data.projects.forEach(project => {
+        const indexById = new Map();
+        data.projects.forEach((project, index) => {
+            indexById.set(project.id, index);
             const cat = project.category || 'Other';
             (grouped[cat] = grouped[cat] || []).push(project);
         });
@@ -71,7 +81,7 @@ async function loadProjects() {
             if (projects.length > 0) {
                 const grid = document.createElement('div');
                 grid.className = 'projects-grid';
-                projects.forEach(project => grid.appendChild(createProjectCard(project)));
+                projects.forEach(project => grid.appendChild(createProjectCard(project, indexById.get(project.id))));
                 group.appendChild(grid);
             } else {
                 const empty = document.createElement('p');

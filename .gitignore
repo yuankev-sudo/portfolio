@@ -1,0 +1,3 @@
+# Backup + temp files written by the local edit server (tools/edit-server.js)
+.projects.json.bak
+projects.json.tmp

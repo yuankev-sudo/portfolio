@@ -1,0 +1,162 @@
+/* Styling for edit mode. Loaded by js/editor.js only while editing —
+   never fetched on the published site. */
+
+:root {
+    --edit-accent: #2f6df6;
+    --edit-dirty: #d98324;
+}
+
+/* Editable fields -------------------------------------------------------- */
+
+.edit-mode .editable-field {
+    outline: 1px dashed transparent;
+    outline-offset: 4px;
+    border-radius: 2px;
+    transition: outline-color 0.15s ease, background-color 0.15s ease;
+    cursor: text;
+}
+
+.edit-mode .editable-field:hover {
+    outline-color: rgba(47, 109, 246, 0.45);
+    background: rgba(47, 109, 246, 0.05);
+}
+
+.edit-mode .editable-field:focus {
+    outline: 2px solid var(--edit-accent);
+    background: rgba(47, 109, 246, 0.07);
+}
+
+/* Edited but not yet written to disk */
+.edit-mode .editable-field.is-dirty {
+    outline: 1px solid var(--edit-dirty);
+    background: rgba(217, 131, 36, 0.1);
+}
+
+/* A field whose JSON value is an empty string still needs somewhere to click */
+.edit-mode .editable-field:empty::before {
+    content: 'Empty — click to write';
+    opacity: 0.35;
+    font-style: italic;
+}
+
+/* Fields sitting on the dark project hero need light-on-dark affordances */
+.edit-mode .project-hero .editable-field:hover {
+    outline-color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.edit-mode .project-hero .editable-field:focus {
+    outline-color: #ffffff;
+    background: rgba(255, 255, 255, 0.16);
+}
+
+/* Toolbar ---------------------------------------------------------------- */
+
+.edit-toolbar {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1rem;
+    background: rgba(20, 20, 20, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 999px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.8rem;
+    color: #ffffff;
+    max-width: calc(100vw - 2rem);
+}
+
+.edit-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #8a8a8a;
+    flex-shrink: 0;
+}
+
+/* Filled once the dev server answers /__api/ping */
+.edit-dot.is-live {
+    background: #3ddc84;
+    box-shadow: 0 0 0 3px rgba(61, 220, 132, 0.2);
+}
+
+.edit-label {
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.edit-count {
+    color: rgba(255, 255, 255, 0.55);
+    white-space: nowrap;
+}
+
+.edit-count.has-changes {
+    color: var(--edit-dirty);
+}
+
+.edit-btn {
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.edit-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.24);
+}
+
+.edit-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.edit-save:not(:disabled) {
+    background: var(--edit-accent);
+}
+
+.edit-save kbd {
+    font-family: inherit;
+    opacity: 0.65;
+    margin-left: 0.3rem;
+}
+
+.edit-flash {
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0;
+    color: #3ddc84;
+    transition: opacity 0.25s ease, max-width 0.25s ease;
+}
+
+.edit-flash.show {
+    max-width: 24rem;
+    opacity: 1;
+}
+
+.edit-flash.is-warning {
+    color: var(--edit-dirty);
+}
+
+@media (max-width: 700px) {
+    .edit-toolbar {
+        flex-wrap: wrap;
+        justify-content: center;
+        border-radius: 1rem;
+    }
+}
