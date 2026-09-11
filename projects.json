@@ -7,7 +7,7 @@
             "category": "Electrical",
             "date": "Aug 2025",
             "subtitle": "Custom PCB, firmware, and UI for a robot-arm training data collection tool",
-            "description": "Designed a ROS-enabled RP2350B controller from scratch across three PCB revisions. Now used in production to collect imitation learning data.",
+            "description": "Designed a ROS-enabled RP2040 controller from scratch across three PCB revisions. Now used in production to collect imitation learning data.",
             "thumbnail": "images/Nupeak/Imitation Learning Controller.png",
             "tags": [
                 "RP2040",
@@ -49,7 +49,7 @@
                     "heading": "Three Revisions",
                     "content": "",
                     "bullets": [
-                        "<strong>V1:</strong> first board from scratch in KiCad, RP2350B, BLDC motor controller, TFT display, tactile buttons",
+                        "<strong>V1:</strong> first board from scratch in KiCad, RP2040, BLDC motor controller, TFT display, tactile buttons",
                         "<strong>V2:</strong> smaller footprint, motor return paths separated from sensitive nets, widened power rails, 4-layer SGPS stackup, nothing routed under the USB differential pair",
                         "<strong>V3:</strong> buck converter to cover the BLDC power budget, solder jumpers to reassign GPIO without a respin, haptics (LRA + driver), signals confined to outer layers"
                     ]
@@ -452,11 +452,11 @@
         {
             "id": "supercapacitor-power-module",
             "number": "04",
-            "title": "Supercapacitor Power Module",
+            "title": "Super Capacitor Power Module",
             "category": "Electrical",
             "date": "In Progress",
             "subtitle": "Burst power assist for a high-agility competition robot",
-            "description": "Supercapacitor module that buffers peak current for hard acceleration so the battery doesn't sag. Built as captain of a team I co-founded.",
+            "description": "Supercapacitor module that buffers peak current for a battle bot chassis. Built as captain of a team I co-founded.",
             "thumbnail": "images/MARC/SuperCap v1 assembled.png",
             "tags": [
                 "Supercapacitors",
@@ -538,7 +538,7 @@
                         },
                         {
                             "value": "TBD",
-                            "label": "Success?"
+                            "label": "Competition result"
                         }
                     ]
                 }
@@ -549,7 +549,7 @@
             "number": "08",
             "title": "Clarus",
             "category": "Software",
-            "date": "June 2026",
+            "date": "Jun 2026",
             "subtitle": "Routing for large vehicles built on measured LiDAR reality, not a restriction database",
             "description": "2nd place ($3,000) at the CYVL Hackathon. A 6-hour solo build that checks whether a fire truck can physically clear each turn, and reroutes when it can't.",
             "github": "https://github.com/yuankev-sudo/CYVL-Hackathon",
@@ -660,8 +660,8 @@
             "title": "Next-Gen Industrial Gateway",
             "category": "Mechanical",
             "date": "Aug 2026",
-            "subtitle": "TODO: one line on what the IPC gateway is and who uses it",
-            "description": "TODO: two lines for the project card. Industrial PC gateway: enclosure design, machining, assembly, and thermal validation over a summer at Laminar.",
+            "subtitle": "Next-generation edge compute hardware for Laminar's sensors",
+            "description": "Compact IP67 enclosure for an off-the-shelf industrial PC, taken from CAD through CNC machining, assembly, and thermal validation.",
             "thumbnail": "images/Laminar-IPC/assembled-display.jpg",
             "tags": [
                 "Enclosure Design",
@@ -672,19 +672,19 @@
             "meta": {
                 "role": "Hardware Engineering Intern",
                 "timeline": "4 months",
-                "teamSize": "TODO"
+                "teamSize": "Solo"
             },
             "techTags": [
                 "SolidWorks",
                 "CNC Machining",
                 "Thermal Validation",
-                "TODO"
+                "Sheet Metal"
             ],
             "sections": [
                 {
                     "type": "overview",
                     "heading": "Overview",
-                    "content": "TODO: what the IPC V1 gateway is, why Laminar needed a next-gen version, and what you owned. Scoped in May, designed and fabricated through June, assembled and tested in July."
+                    "content": "Laminar's previous gateway ran on custom compute modules designed from scratch, but they were hard to manufacture and their performance didn't justify the cost. The company is switching to off-the-shelf (OTS) industrial PCs, and my task was to design a compact enclosure for them with good heat dissipation."
                 },
                 {
                     "type": "gallery",
@@ -692,39 +692,29 @@
                     "images": [
                         {
                             "src": "images/Laminar-IPC/enclosure-cad-closed.png",
-                            "alt": "Enclosure CAD, closed",
-                            "caption": "TODO caption"
+                            "alt": "V1 enclosure CAD, closed",
+                            "caption": "V1: clear-lid enclosure with external heat sink"
                         },
                         {
                             "src": "images/Laminar-IPC/enclosure-cad-open.png",
-                            "alt": "Enclosure CAD, open",
-                            "caption": "TODO caption"
+                            "alt": "V1 enclosure CAD, open",
+                            "caption": "V1 internals"
                         },
                         {
-                            "src": "images/Laminar-IPC/enclosure-cad-internal.png",
-                            "alt": "Enclosure CAD, internals",
-                            "caption": "TODO caption"
+                            "src": "images/Laminar-IPC/bench-unit.jpg",
+                            "alt": "V1 assembled unit",
+                            "caption": "V1 assembled"
                         }
                     ]
                 },
                 {
                     "type": "problem",
                     "heading": "The Challenge",
-                    "content": "",
+                    "content": "These high-performance IPCs generate significant heat under load. They also sit directly on factory floors next to CIP lines, so the enclosure has to meet IP67:",
                     "bullets": [
-                        "TODO: constraint one (sealing / ingress rating?)",
-                        "TODO: constraint two (thermal budget in a sealed enclosure?)",
-                        "TODO: constraint three (connector layout, serviceability?)"
-                    ]
-                },
-                {
-                    "type": "technical",
-                    "heading": "Approach",
-                    "content": "",
-                    "bullets": [
-                        "<strong>TODO:</strong> enclosure design decision",
-                        "<strong>TODO:</strong> machining and tolerance decision",
-                        "<strong>TODO:</strong> thermal management decision"
+                        "<strong>Watertight:</strong> fully sealed to IP67",
+                        "<strong>Heat dissipation:</strong> keeps the IPC cool under sustained load",
+                        "<strong>Compact packaging:</strong> small, and laid out for easy assembly"
                     ]
                 },
                 {
@@ -734,12 +724,12 @@
                         {
                             "src": "images/Laminar-IPC/mounting-plate.png",
                             "alt": "Mounting plate drawing",
-                            "caption": "TODO caption"
+                            "caption": "Sheet metal mounting plate design"
                         },
                         {
                             "src": "images/Laminar-IPC/cnc-machining.jpg",
                             "alt": "CNC machining the plate",
-                            "caption": "TODO caption"
+                            "caption": "CNC-machined double-D keyholes for the Ethernet bulkhead connectors"
                         }
                     ]
                 },
@@ -747,7 +737,7 @@
                     "type": "video",
                     "heading": "Fabrication",
                     "content": "",
-                    "caption": "TODO: caption for the CNC milling clip",
+                    "caption": "CNC milling a reflow jig",
                     "src": "images/Laminar-IPC/cnc-milling.mp4",
                     "format": "mp4"
                 },
@@ -756,26 +746,26 @@
                     "layout": "grid-3",
                     "images": [
                         {
-                            "src": "images/Laminar-IPC/enclosure-connectors.jpg",
-                            "alt": "Enclosure with connectors",
-                            "caption": "TODO caption"
+                            "src": "images/Laminar-IPC/enclosure-cad-internal.png",
+                            "alt": "V2 enclosure CAD, internals",
+                            "caption": "V2 final CAD"
                         },
                         {
-                            "src": "images/Laminar-IPC/bench-unit.jpg",
-                            "alt": "Unit on the bench",
-                            "caption": "TODO caption"
+                            "src": "images/Laminar-IPC/enclosure-connectors.jpg",
+                            "alt": "V2 enclosure with connectors",
+                            "caption": "V2 internal packaging"
                         },
                         {
                             "src": "images/Laminar-IPC/assembled-display.jpg",
-                            "alt": "Assembled unit with display",
-                            "caption": "TODO caption"
+                            "alt": "V2 assembled unit with display",
+                            "caption": "V2 assembled"
                         }
                     ]
                 },
                 {
                     "type": "overview",
                     "heading": "Thermal Validation",
-                    "content": "TODO: describe the burn-in runs. The two plots below are the 60-hour and 120-hour system temperature logs."
+                    "content": "The graphs below compare the two versions. V2's aluminum enclosure and internal circulation fan ran significantly cooler, thanks to better internal convection, higher thermal mass, and higher thermal conductivity. Even over a run twice as long, V2 peaked 13 °C lower."
                 },
                 {
                     "type": "gallery",
@@ -783,32 +773,43 @@
                     "images": [
                         {
                             "src": "images/Laminar-IPC/thermal-60h.png",
-                            "alt": "60-hour thermal log",
-                            "caption": "TODO: 60h run, peak 94.0 C"
+                            "alt": "V1 60-minute thermal log",
+                            "caption": "V1: 60-minute run, 94.0 °C peak"
                         },
                         {
                             "src": "images/Laminar-IPC/thermal-120h.png",
-                            "alt": "120-hour thermal log",
-                            "caption": "TODO: 120h run, peak 81.0 C"
+                            "alt": "V2 128-minute thermal log",
+                            "caption": "V2: 128-minute run, 81.0 °C peak"
                         }
                     ]
                 },
                 {
                     "type": "results",
                     "heading": "Results",
-                    "content": "",
+                    "content": "The V2 enclosure is now deployed at a real customer site.",
                     "metrics": [
                         {
-                            "value": "TODO",
-                            "label": "TODO"
+                            "value": "Deployed",
+                            "label": "At a customer site"
                         },
                         {
-                            "value": "TODO",
-                            "label": "TODO"
+                            "value": "End-to-end",
+                            "label": "CAD to deployment"
                         },
                         {
-                            "value": "TODO",
-                            "label": "TODO"
+                            "value": "40 °C",
+                            "label": "Ambient temperature tolerance"
+                        }
+                    ]
+                },
+                {
+                    "type": "gallery",
+                    "layout": "side-by-side",
+                    "images": [
+                        {
+                            "src": "images/Laminar-IPC/Picture1.jpg",
+                            "alt": "Team selfie at the customer site",
+                            "caption": "The team on deployment day"
                         }
                     ]
                 }
@@ -820,8 +821,8 @@
             "title": "LED Calibration Station",
             "category": "Electrical",
             "date": "Aug 2026",
-            "subtitle": "TODO: one line on what the calibration station does",
-            "description": "TODO: two lines for the project card. Spectral LED calibration station: board design across three revisions, optical fixture, and calibration firmware.",
+            "subtitle": "A calibration station that sweeps across light wavelengths to test Laminar's spectral sensors",
+            "description": "Modular LED calibration station for developing, testing, and validating Laminar's spectral sensors.",
             "thumbnail": "images/Laminar-LED/fixture-lit.jpg",
             "tags": [
                 "KiCad",
@@ -832,20 +833,36 @@
             "meta": {
                 "role": "Hardware Engineering Intern",
                 "timeline": "3 months",
-                "teamSize": "TODO"
+                "teamSize": "Solo"
             },
             "techTags": [
                 "KiCad",
-                "AS7265x",
-                "Firmware",
-                "Optical Fixture",
-                "TODO"
+                "STM32H5",
+                "Zephyr",
+                "Sensor Fixture Design",
+                "PoE"
             ],
             "sections": [
                 {
                     "type": "overview",
                     "heading": "Overview",
-                    "content": "TODO: what the calibration station is for, why per-unit LED calibration matters, and what you built. Board design started in June, firmware ran through August."
+                    "content": "One of several hardware projects I built during my summer 2026 internship at Laminar. The station calibrates Laminar's new Flex Sensor line, which fingerprints products to speed up CIP processes in CPG factories. It emits light across a range of wavelengths to simulate real-world emission spectra, so R&amp;D can test sensors in-house and the contract manufacturer (CM) can validate units before they ship to customers."
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-2",
+                    "images": [
+                        {
+                            "src": "images/Laminar-LED/carrier-board-layout.png",
+                            "alt": "Carrier board layout",
+                            "caption": "Main board layout"
+                        },
+                        {
+                            "src": "images/Laminar-LED/assembled-boards.jpg",
+                            "alt": "Assembled boards",
+                            "caption": "Main board assembled"
+                        }
+                    ]
                 },
                 {
                     "type": "gallery",
@@ -854,86 +871,45 @@
                         {
                             "src": "images/Laminar-LED/cal-board-v1.png",
                             "alt": "Calibration board rev 1",
-                            "caption": "TODO: rev 1"
+                            "caption": "Mantis LED breakout board"
                         },
                         {
                             "src": "images/Laminar-LED/cal-board-v2.png",
                             "alt": "Calibration board rev 2",
-                            "caption": "TODO: rev 2"
+                            "caption": "Ultra Spectral LED breakout board"
                         },
                         {
                             "src": "images/Laminar-LED/cal-board-v3.png",
                             "alt": "Calibration board rev 3",
-                            "caption": "TODO: rev 3"
+                            "caption": "NIR LED breakout board"
                         }
                     ]
                 },
                 {
                     "type": "problem",
                     "heading": "The Challenge",
-                    "content": "",
+                    "content": "The requirements were open-ended, which left me free to define the station's form factor and capabilities. I prioritized three constraints:",
                     "bullets": [
-                        "TODO: constraint one (unit-to-unit LED variation?)",
-                        "TODO: constraint two (repeatable optical coupling in the fixture?)",
-                        "TODO: constraint three (throughput on the line?)"
-                    ]
-                },
-                {
-                    "type": "technical",
-                    "heading": "Approach",
-                    "content": "",
-                    "bullets": [
-                        "<strong>TODO:</strong> board architecture decision",
-                        "<strong>TODO:</strong> spectral sensor choice and placement",
-                        "<strong>TODO:</strong> calibration firmware routine"
+                        "<strong>Modularity:</strong> if Laminar ships sensors at new wavelengths, only a new LED breakout board is needed, not a full redesign",
+                        "<strong>Flexible power input:</strong> runs off PoE, a barrel jack, or USB-C, with protection in case more than one source is connected at once",
+                        "<strong>Ease of sensor change:</strong> the sensor under test mates to a socket on the main board, so units swap quickly in R&amp;D or at the CM"
                     ]
                 },
                 {
                     "type": "gallery",
-                    "layout": "grid-3",
+                    "layout": "side-by-side",
                     "images": [
-                        {
-                            "src": "images/Laminar-LED/carrier-board-layout.png",
-                            "alt": "Carrier board layout",
-                            "caption": "TODO caption"
-                        },
-                        {
-                            "src": "images/Laminar-LED/spectral-sensor-board.png",
-                            "alt": "Spectral sensor board",
-                            "caption": "TODO: AS7265x spectral triad"
-                        },
                         {
                             "src": "images/Laminar-LED/station-cad.png",
                             "alt": "Station CAD",
-                            "caption": "TODO caption"
-                        }
-                    ]
-                },
-                {
-                    "type": "gallery",
-                    "layout": "grid-3",
-                    "images": [
-                        {
-                            "src": "images/Laminar-LED/assembled-boards.jpg",
-                            "alt": "Assembled boards",
-                            "caption": "TODO caption"
-                        },
-                        {
-                            "src": "images/Laminar-LED/ring-board.jpg",
-                            "alt": "Ring board",
-                            "caption": "TODO caption"
-                        },
-                        {
-                            "src": "images/Laminar-LED/pcb-batch.jpg",
-                            "alt": "Batch of assembled boards",
-                            "caption": "TODO caption"
+                            "caption": "Final CAD render"
                         }
                     ]
                 },
                 {
                     "type": "overview",
                     "heading": "Fixture & Bring-Up",
-                    "content": "TODO: describe the optical fixture iterations and bench bring-up."
+                    "content": "The fixture took a few attempts to get right. I wanted something users could snap on directly, with no changes to the sensor hardware. And as a personal challenge, it had to be satisfying to click into place."
                 },
                 {
                     "type": "gallery",
@@ -942,17 +918,17 @@
                         {
                             "src": "images/Laminar-LED/fixture-iterations.jpg",
                             "alt": "Fixture iterations",
-                            "caption": "TODO caption"
+                            "caption": "Sensor jig prototypes"
                         },
                         {
                             "src": "images/Laminar-LED/boards-and-fixture.jpg",
                             "alt": "Boards with fixture",
-                            "caption": "TODO caption"
+                            "caption": "Main station with swappable breakout boards"
                         },
                         {
                             "src": "images/Laminar-LED/fixture-lit.jpg",
                             "alt": "Fixture under test",
-                            "caption": "TODO caption"
+                            "caption": "Top view"
                         }
                     ]
                 },
@@ -963,8 +939,18 @@
                         {
                             "src": "images/Laminar-LED/optical-test.jpg",
                             "alt": "Optical bench test",
-                            "caption": "TODO caption"
+                            "caption": "Calibration station in use"
                         }
+                    ]
+                },
+                {
+                    "type": "technical",
+                    "heading": "Firmware",
+                    "content": "I wrote all of the station's firmware, learning Zephyr RTOS from scratch along the way.",
+                    "bullets": [
+                        "<strong>Work queue:</strong> calibration requests are queued and run in order without blocking the rest of the system",
+                        "<strong>Interrupts:</strong> an ISR handles sensor swaps the moment they happen",
+                        "<strong>Mutexes and semaphores:</strong> protect shared peripherals and keep threads in sync"
                     ]
                 },
                 {
@@ -973,16 +959,53 @@
                     "content": "",
                     "metrics": [
                         {
+                            "value": "360–2300 nm",
+                            "label": "Wavelength coverage"
+                        },
+                        {
                             "value": "3",
-                            "label": "Board revisions"
+                            "label": "Breakout boards"
                         },
                         {
-                            "value": "TODO",
-                            "label": "TODO"
+                            "value": "1",
+                            "label": "Board revision"
+                        }
+                    ]
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-3",
+                    "images": [
+                        {
+                            "src": "images/Laminar-LED/spectral-sensor-board.png",
+                            "alt": "Spectral sensor board",
+                            "caption": "Solder jumpers to fix an I2C address conflict"
                         },
                         {
-                            "value": "TODO",
-                            "label": "TODO"
+                            "src": "images/Laminar-LED/ring-board.jpg",
+                            "alt": "Ring board",
+                            "caption": "Hand-soldered ring board"
+                        },
+                        {
+                            "src": "images/Laminar-LED/pcb-batch.jpg",
+                            "alt": "Batch of assembled boards",
+                            "caption": "A batch of boards off the bench"
+                        }
+                    ]
+                },
+                {
+                    "type": "gallery",
+                    "layout": "grid-2",
+                    "images": [
+                        {
+                            "src": "images/Laminar-NIR/driver-board.jpg",
+                            "alt": "Overcurrent protection board",
+                            "caption": "Overcurrent protection board"
+                        },
+                        {
+                            "src": "images/Laminar-NIR/scope-capture.jpg",
+                            "alt": "I2C decode on oscilloscope",
+                            "caption": "Debugging calibration board I2C traffic on the scope"
                         }
                     ]
                 }
@@ -994,8 +1017,8 @@
             "title": "NIR Bulb Backup Circuit",
             "category": "Electrical",
             "date": "Aug 2026",
-            "subtitle": "TODO: one line on what the backup circuit does",
-            "description": "TODO: two lines for the project card. Analog backup drive circuit for an NIR bulb, taken from hand analysis through LTspice to bench validation.",
+            "subtitle": "An analog failover circuit for the bulb in Laminar's NIR sensors",
+            "description": "Analog failover bulb circuit that extends NIR sensor life in the field.",
             "thumbnail": "images/Laminar-NIR/bench-supply.jpg",
             "tags": [
                 "Analog Design",
@@ -1010,24 +1033,24 @@
             },
             "techTags": [
                 "LTspice",
-                "Op-Amp",
-                "Si7336ADP",
+                "Analog",
+                "Tolerance",
                 "Bench Validation"
             ],
             "sections": [
                 {
                     "type": "overview",
                     "heading": "Overview",
-                    "content": "TODO: what the NIR bulb is used for, why it needed a backup drive path, and what you designed. Built in August."
+                    "content": "I designed a failover circuit for the bulb in Laminar's NIR spectral sensor. The project landed on my desk in my second-to-last week, so the deadline was tight."
                 },
                 {
                     "type": "problem",
                     "heading": "The Challenge",
-                    "content": "",
+                    "content": "One of my favorite projects at Laminar. The analog design was fun on its own, but the constraints made it even more interesting:",
                     "bullets": [
-                        "TODO: constraint one (what fails without a backup path?)",
-                        "TODO: constraint two (drive current / thermal limits?)",
-                        "TODO: constraint three (must not interfere with the primary path?)"
+                        "<strong>Fully analog:</strong> no digital signal can directly control the backup bulb, since the STM32H5 has no pins to spare",
+                        "<strong>Small footprint:</strong> as small as possible, so the circuit can be integrated into different sensor packages as needed",
+                        "<strong>Consistent performance:</strong> bulb one and bulb two have to perform the same"
                     ]
                 },
                 {
@@ -1037,23 +1060,13 @@
                         {
                             "src": "images/Laminar-NIR/circuit-sketch.jpg",
                             "alt": "Circuit sketch",
-                            "caption": "TODO caption"
+                            "caption": "Early circuit sketches"
                         },
                         {
                             "src": "images/Laminar-NIR/whiteboard-analysis.jpg",
                             "alt": "Whiteboard analysis",
-                            "caption": "TODO: hand derivation of the operating point"
+                            "caption": "Hand calculations for the comparator circuit"
                         }
-                    ]
-                },
-                {
-                    "type": "technical",
-                    "heading": "Approach",
-                    "content": "",
-                    "bullets": [
-                        "<strong>TODO:</strong> topology choice (op-amp feedback around a MOSFET pass element)",
-                        "<strong>TODO:</strong> what the hand analysis established before simulating",
-                        "<strong>TODO:</strong> what LTspice confirmed or changed"
                     ]
                 },
                 {
@@ -1063,52 +1076,31 @@
                         {
                             "src": "images/Laminar-NIR/ltspice-sim.png",
                             "alt": "LTspice simulation",
-                            "caption": "TODO: LTspice transient sim"
+                            "caption": "Simulating the backup bulb circuit in LTspice"
                         }
                     ]
                 },
                 {
                     "type": "overview",
                     "heading": "Bench Validation",
-                    "content": "TODO: describe the bench bring-up on the Keysight supply."
+                    "content": "Tolerance calculations let me spec shunt resistors that give a reliable switching threshold. I then mocked up the circuit on a breadboard using through-hole parts from the lab, and it worked."
                 },
                 {
                     "type": "video",
                     "heading": "Bench Demo",
                     "content": "",
-                    "caption": "TODO: caption for the bench demo clip",
+                    "caption": "Failover bulb turning on",
                     "src": "images/Laminar-NIR/bench-demo.mp4",
                     "format": "mp4"
-                },
-                {
-                    "type": "gallery",
-                    "layout": "grid-3",
-                    "images": [
-                        {
-                            "src": "images/Laminar-NIR/bench-supply.jpg",
-                            "alt": "Bench supply test",
-                            "caption": "TODO caption"
-                        },
-                        {
-                            "src": "images/Laminar-NIR/bench-switching.jpg",
-                            "alt": "Switching test",
-                            "caption": "TODO caption"
-                        },
-                        {
-                            "src": "images/Laminar-NIR/driver-board.jpg",
-                            "alt": "Driver board",
-                            "caption": "TODO caption"
-                        }
-                    ]
                 },
                 {
                     "type": "gallery",
                     "layout": "side-by-side",
                     "images": [
                         {
-                            "src": "images/Laminar-NIR/scope-capture.jpg",
-                            "alt": "Scope capture",
-                            "caption": "TODO caption"
+                            "src": "images/Laminar-NIR/bench-supply.jpg",
+                            "alt": "Bench supply test",
+                            "caption": "Benchtop setup"
                         }
                     ]
                 },
@@ -1118,16 +1110,16 @@
                     "content": "",
                     "metrics": [
                         {
-                            "value": "TODO",
-                            "label": "TODO"
+                            "value": "4 × 5 mm",
+                            "label": "Footprint"
                         },
                         {
-                            "value": "TODO",
-                            "label": "TODO"
+                            "value": "Fully analog",
+                            "label": "No digital control"
                         },
                         {
-                            "value": "TODO",
-                            "label": "TODO"
+                            "value": "~$0.50",
+                            "label": "Component cost"
                         }
                     ]
                 }
