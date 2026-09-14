@@ -1125,5 +1125,62 @@
                 }
             ]
         }
-    ]
+    ],
+    "graphics": {
+        "eyebrow": "§02 — before the soldering iron",
+        "heading": "I pushed pixels before I pushed copper.",
+        "intro": "Posters and marks from high school, mostly for arts programs and Chinatown nonprofits around Vancouver. Same job as a board layout, honestly: fit everything inside one rectangle, make the important thing loud, and don't let two elements fight over the same space.",
+        "items": [
+            {
+                "id": "student-performance",
+                "designator": "G01",
+                "title": "Student Performance Showcase",
+                "year": "2022",
+                "meta": "Poster · Performing Arts Council",
+                "note": "Every instrument flattened down to black shapes, then packed in until the yellow ran out of room. The title turns the corner because there was nowhere left for it to go.",
+                "src": "images/graphics/student-performance.jpg",
+                "alt": "Yellow and black poster for a student performance showcase built from flat vector instrument shapes"
+            },
+            {
+                "id": "the-journey",
+                "designator": "G02",
+                "title": "The Journey",
+                "year": "2021",
+                "meta": "Contest poster · YFAR × Vancouver Chinatown Foundation",
+                "note": "Two figures cut out of Chinatown street photography, standing on a field of 旅途 in red. The outline type is borrowed from the neon a couple of blocks from where the photos were shot.",
+                "src": "images/graphics/the-journey.jpg",
+                "alt": "Poster for The Journey design contest, with figures masked out of Chinatown photography over repeating Chinese characters"
+            },
+            {
+                "id": "light-up-chinatown",
+                "designator": "G03",
+                "title": "Light Up Chinatown",
+                "year": "2022",
+                "meta": "Event poster · Youth Forum for Asian Representation × Chinatown Storytelling Centre",
+                "note": "A historical scavenger hunt through Vancouver's Chinatown. The White Rabbit candy is redrawn by hand — anyone who was handed one as a kid clocks it in about half a second, which was the entire idea.",
+                "src": "images/graphics/light-up-chinatown.jpg",
+                "alt": "Deep blue poster for the Light Up Chinatown historical scavenger hunt, with illustrated White Rabbit candies"
+            },
+            {
+                "id": "group-6-show",
+                "designator": "G04",
+                "title": "Group 6 Show",
+                "year": "2022",
+                "meta": "Exhibition poster · Senior school arts show",
+                "note": "The grid is my classmates' actual work — film, music, theatre, visual art. The letterforms aren't printed over the top of it, they're punched through it, so the pieces spell out the show themselves.",
+                "src": "images/graphics/group-6-show.jpg",
+                "alt": "Exhibition poster made of a grid of student artwork with black cut-out letterforms"
+            },
+            {
+                "id": "great-composers",
+                "designator": "G05",
+                "title": "The Great Composers",
+                "year": "2021",
+                "meta": "Identity marks and lockups",
+                "note": "A treble clef and a lowercase g are the same curve if you squint hard enough. A sheet of marks chasing that, plus the logotype lockups that came out of it.",
+                "src": "images/graphics/great-composers.jpg",
+                "alt": "Black and white sheet of logo marks combining a treble clef with a lowercase g, and logotype lockups"
+            }
+        ]
+    }
 }

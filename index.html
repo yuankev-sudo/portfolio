@@ -3,61 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kevin Yuan - Embedded Hardware Portfolio</title>
+    <title>Kevin Yuan — Embedded Hardware</title>
+    <meta name="description" content="Kevin Yuan builds embedded hardware: PCB design, firmware, and the mechanical work around it. Computer engineering at the University of Michigan.">
     <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body id="top">
     <header>
         <div class="header-content">
-            <h1>Kevin Yuan</h1>
+            <h1><a href="#top" class="wordmark">Kevin Yuan<span class="wordmark-dot">.</span></a></h1>
             <nav>
-                <a href="#work">Work</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
+                <a href="#work"><span class="nav-idx">01</span>work</a>
+                <a href="#graphics"><span class="nav-idx">02</span>graphics</a>
+                <a href="#about"><span class="nav-idx">03</span>about</a>
+                <a href="#contact"><span class="nav-idx">04</span>contact</a>
             </nav>
+            <div class="status">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span id="local-time">Ann Arbor, MI</span>
+            </div>
         </div>
     </header>
 
     <div class="container">
-        <section id="work" class="projects-section">
-            <h3 class="section-title">Selected Work</h3>
-            <div id="projects-container" class="projects-container">
-                <!-- Projects will be loaded dynamically, grouped by category -->
+        <section class="hero">
+            <div class="hero-main">
+                <p class="eyebrow">§00 — embedded hardware</p>
+                <h2 class="hero-title">
+                    Most of this was version
+                    <span class="circled">three<svg viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true"><path d="M 262,26 C 250,8 190,2 130,6 C 60,11 11,29 10,52 C 9,77 70,95 148,93 C 227,91 289,73 290,49 C 291,29 249,13 194,9"/></svg></span>.
+                </h2>
+                <p class="hero-lede">
+                    Schematic, layout, firmware, and usually the enclosure around it.
+                    The first board never works the way I drew it, which is why
+                    almost everything below has a <strong>V2</strong> and a <strong>V3</strong>.
+                </p>
+                <div class="hero-cta">
+                    <a href="#work" class="btn btn-solid">See the work ↓</a>
+                    <a href="resume.pdf" download class="btn">Résumé (PDF)</a>
+                    <a href="#" id="email-link-hero" class="btn">Copy my email</a>
+                </div>
+            </div>
+
+            <div class="spec">
+                <div class="spec-row"><span class="spec-key">Who</span><span class="spec-val">Kevin Yuan</span></div>
+                <div class="spec-row"><span class="spec-key">Studying</span><span class="spec-val">Computer Engineering, University of Michigan</span></div>
+                <div class="spec-row"><span class="spec-key">Does</span><span class="spec-val">PCB design · firmware · mechanical CAD</span></div>
+                <div class="spec-row"><span class="spec-key">Lately</span><span class="spec-val">Laminar '26 · Nupeak Robotics '25</span></div>
+                <div class="spec-row"><span class="spec-key">Bench</span><span class="spec-val">Altium · KiCad · SolidWorks · Zephyr · ROS</span></div>
             </div>
         </section>
+    </div>
 
+    <!-- Full-bleed ticker. The list is duplicated so the loop is seamless. -->
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+            <div class="marquee-item">Altium</div>
+            <div class="marquee-item">KiCad</div>
+            <div class="marquee-item">Rigid-flex</div>
+            <div class="marquee-item">RP2350B</div>
+            <div class="marquee-item">Zephyr RTOS</div>
+            <div class="marquee-item">ROS Noetic</div>
+            <div class="marquee-item">SolidWorks</div>
+            <div class="marquee-item">IP67</div>
+            <div class="marquee-item">LTspice</div>
+            <div class="marquee-item">CAN bus</div>
+            <div class="marquee-item">4-layer SGPS</div>
+            <div class="marquee-item">Hand-soldered 0402</div>
+            <div class="marquee-item">Altium</div>
+            <div class="marquee-item">KiCad</div>
+            <div class="marquee-item">Rigid-flex</div>
+            <div class="marquee-item">RP2350B</div>
+            <div class="marquee-item">Zephyr RTOS</div>
+            <div class="marquee-item">ROS Noetic</div>
+            <div class="marquee-item">SolidWorks</div>
+            <div class="marquee-item">IP67</div>
+            <div class="marquee-item">LTspice</div>
+            <div class="marquee-item">CAN bus</div>
+            <div class="marquee-item">4-layer SGPS</div>
+            <div class="marquee-item">Hand-soldered 0402</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section id="work" class="projects-section">
+            <div class="section-head reveal">
+                <p class="eyebrow">§01 — selected work</p>
+                <h3 class="section-title">Boards, brackets, and the code that <span class="hl">argues</span> with them.</h3>
+            </div>
+            <div id="projects-container" class="projects-container">
+                <!-- Projects are loaded from projects.json, grouped by category -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Graphics design: full-bleed inverted band, rendered from projects.json -->
+    <section id="graphics" class="graphics-section">
+        <div class="graphics-inner" id="graphics-container"></div>
+    </section>
+
+    <div class="container">
         <section id="about" class="about-section">
-            <div class="about-image">
+            <div class="about-image reveal">
                 <img src="images/profile.png" alt="Kevin Yuan">
             </div>
-            <div class="about-content">
-                <h3>About</h3>
-                <p>HI! I'm Kevin Yuan, a computer and robotics engineering student at the University of Michigan. Aspiring to be an embedded hardware engineer with a passion for creating elegant hardware solutions. With expertise in both electronics, mechanics and software, I enjoy tackling full-stack challenges that require creative problem-solving across multiple domains.</p>
-                <p>If you can't find me in Robotics Building Computer Lab, try the poker room, driving range, boulder gym or ... just call me.</p>
+            <div class="about-content reveal">
+                <p class="eyebrow">§03 — about</p>
+                <h3>Who's actually typing.</h3>
+                <p>I'm Kevin. Computer engineering at Michigan, mostly pointed at robotics. I got here the boring way — I wanted a thing to exist, nobody was going to build it for me, so I learned KiCad.</p>
+                <p>Most of what's on this page started with someone saying <em>"can you make something that does X."</em> A handheld controller for teaching robot arms. A cockpit board for an electric race boat. An enclosure that survives a factory washdown. I usually take the whole thing — board, firmware, and the CAD — because handing a design off halfway is how you end up with a connector that doesn't fit.</p>
+                <p>Before any of it I made posters, which turned out to be the same job with different constraints.</p>
+                <p>If I'm not in the Robotics Building lab, try the poker room, the driving range, or the bouldering gym. Or just call.</p>
+
+                <div class="skills-list">
+                    <h4>What I reach for</h4>
+                    <div class="skills-columns">
+                        <div>Altium Designer</div>
+                        <div>SolidWorks</div>
+                        <div>KiCad</div>
+                        <div>Fusion 360</div>
+                        <div>C / C++</div>
+                        <div>Zephyr RTOS</div>
+                        <div>Python</div>
+                        <div>ROS Noetic</div>
+                        <div>LTspice</div>
+                        <div>Rigid-flex layout</div>
+                        <div>Scope &amp; bench work</div>
+                        <div>Reflow &amp; rework</div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="contact" class="contact-section">
-            <h3>Let's work together</h3>
+        <section id="contact" class="contact-section reveal">
+            <p class="eyebrow">§04 — contact</p>
+            <h3>Come say hi.</h3>
+            <p class="contact-note">Email is the fastest way to reach me. I read all of it, and I answer quicker than my inbox suggests.</p>
             <div class="contact-links">
-                <a href="#" id="email-link">Email</a>
-                <a href="https://github.com/yuankev-sudo" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/shilin-yuan/" target="_blank">LinkedIn</a>
-                <a href="resume.pdf" download>Resume</a>
+                <a href="#" id="email-link" class="btn btn-solid">yuankev@umich.edu</a>
+                <a href="https://github.com/yuankev-sudo" target="_blank" rel="noopener" class="btn">GitHub</a>
+                <a href="https://www.linkedin.com/in/shilin-yuan/" target="_blank" rel="noopener" class="btn">LinkedIn</a>
+                <a href="resume.pdf" download class="btn">Résumé</a>
             </div>
         </section>
 
         <footer>
-            <p>© 2026 Kevin Yuan — Embedded Systems Engineer</p>
+            <p>© 2026 Kevin Yuan</p>
+            <p>Hand-built. Revised more than strictly necessary.</p>
         </footer>
     </div>
 
     <!-- Toast notification -->
-    <div id="toast" class="toast">Email copied to clipboard</div>
+    <div id="toast" class="toast">Email copied — talk soon</div>
 
     <!-- Inline content editor: localhost only, inert once deployed.
          Must load before the renderer so it can tag elements. -->

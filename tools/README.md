@@ -26,7 +26,8 @@ press **⌘S** (or click **Save**) to write the change into `projects.json`.
 
 Project titles, numbers, dates, descriptions, subtitles, tags and tech tags,
 role/timeline/team, every section heading, paragraph and bullet, image and video
-captions, and results metrics — 386 fields in all.
+captions, and results metrics. On the home page, the graphics-design intro and
+each poster's title, year, credit line and note — 407 fields in all.
 
 Deliberately not editable: `id`, `category`, `type`, `layout`, image/video paths,
 and `alt` text. Those are structural or invisible, and changing them from the

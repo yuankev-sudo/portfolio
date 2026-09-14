@@ -596,3 +596,256 @@ header nav a:hover {
         gap: 2rem;
     }
 }
+/* ==========================================================================
+   Bench-paper refresh — matches the home page.
+   Appended last so these win over the equivalent rules above.
+   ========================================================================== */
+
+header {
+    background: rgba(242, 240, 233, 0.82);
+    border-bottom: 1px solid transparent;
+}
+
+header.scrolled {
+    box-shadow: none;
+    background: rgba(242, 240, 233, 0.94);
+    border-bottom-color: var(--ink);
+}
+
+/* Hero: keep the photo, but flatten it toward the page's palette so the
+   headline stays readable over any thumbnail. */
+.project-hero::before {
+    background:
+        linear-gradient(to top, rgba(10, 9, 8, 0.88) 0%, rgba(10, 9, 8, 0.42) 55%, rgba(10, 9, 8, 0.55) 100%);
+}
+
+.project-hero h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+}
+
+.project-subtitle {
+    font-size: 1.1rem;
+    max-width: 46ch;
+}
+
+.meta-item {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+}
+
+.meta-item + .meta-item::before {
+    content: '/';
+    margin-right: 2rem;
+    opacity: 0.5;
+}
+
+.project-meta {
+    gap: 0;
+    column-gap: 2rem;
+}
+
+.tech-tag,
+.github-link {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    border-radius: 0;
+    text-transform: uppercase;
+}
+
+.github-link {
+    border: 1.5px solid var(--paper);
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 4px 4px 0 rgba(242, 240, 233, 0.3);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.github-link:hover {
+    background: var(--pop);
+    border-color: var(--pop);
+    color: var(--paper);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(242, 240, 233, 0.4);
+}
+
+/* Section headings get a mono rule above them, like a drawing callout */
+.content-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+    margin-bottom: 1.75rem;
+    padding-top: 1rem;
+    border-top: 1.5px solid var(--ink);
+}
+
+.subsection-heading {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin: 3rem 0 1rem;
+}
+
+.content-bullets li {
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+/* Bullets marked like a parts list */
+.content-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--pop);
+}
+
+/* Galleries: bordered plates on the paper */
+.gallery-image img,
+.gallery-image video,
+.full-width-image img,
+.hero-image img {
+    border: 1.5px solid var(--ink);
+    background: var(--paper-2);
+}
+
+.gallery-grid-2 .gallery-image img,
+.gallery-grid-3 .gallery-image img,
+.gallery-grid-2 .gallery-image video,
+.gallery-grid-3 .gallery-image video {
+    background: #0b0a09;
+}
+
+.gallery-image figcaption,
+.full-width-image figcaption,
+.video-caption,
+.hero-image figcaption {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+}
+
+.video-container video {
+    border: 1.5px solid var(--ink);
+}
+
+/* Results read as a spec table rather than floating numbers */
+.results-grid {
+    border-top: 1.5px solid var(--ink);
+    padding-top: 2rem;
+    gap: 2rem;
+}
+
+.result-item {
+    text-align: left;
+    border-left: 1.5px solid var(--ink);
+    padding-left: 1.25rem;
+}
+
+.result-number {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+}
+
+.result-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 0.5rem;
+}
+
+/* Next / previous: same hard-shadow cards as everywhere else */
+.project-navigation {
+    border-top: 1.5px solid var(--ink);
+}
+
+.nav-project {
+    border: 1.5px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+    background: var(--paper);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nav-project:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 var(--pop);
+    border-color: var(--ink);
+}
+
+.nav-label {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+}
+
+.nav-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+/* Lightbox controls, restyled to match the buttons on the home page */
+.lightbox {
+    background: rgba(10, 9, 8, 0.94);
+}
+
+.lightbox-btn,
+.lightbox-zoom-level {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-radius: 0;
+}
+
+.lightbox-btn {
+    border: 1.5px solid rgba(242, 240, 233, 0.5);
+    background: transparent;
+}
+
+.lightbox-btn:hover {
+    background: var(--acid);
+    border-color: var(--acid);
+    color: var(--ink);
+}
+
+.lightbox img {
+    border: 1.5px solid rgba(242, 240, 233, 0.5);
+    box-shadow: none;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .result-item {
+        border-left: none;
+        border-top: 1.5px solid var(--ink);
+        padding-left: 0;
+        padding-top: 1rem;
+    }
+}
