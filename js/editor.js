@@ -4,7 +4,7 @@
 // field, then writes the changes back into projects.json through the local dev
 // server (tools/edit-server.js).
 //
-// Only ever active on localhost — there is deliberately no way to switch it on
+// Only ever active on localhost. There is deliberately no way to switch it on
 // from the deployed site, so visitors never see the editing UI. Turn it off
 // locally with ?edit=0. Loads before app.js / project.js so the renderers can
 // tag elements with the JSON path they came from.
@@ -97,7 +97,7 @@
         el.addEventListener('input', () => markState(el));
 
         el.addEventListener('keydown', e => {
-            // Every field is a single JSON string — no newlines to insert.
+            // Every field is a single JSON string, so no newlines to insert.
             if (e.key === 'Enter') {
                 e.preventDefault();
                 el.blur();
@@ -162,7 +162,7 @@
 
             if (result.rejected && result.rejected.length) {
                 console.warn('Some edits were rejected:', result.rejected);
-                flash(`Saved ${result.applied.length}, rejected ${result.rejected.length} — see console`, true);
+                flash(`Saved ${result.applied.length}, rejected ${result.rejected.length}. See console.`, true);
             } else {
                 flash(`Saved ${patches.length} edit${patches.length === 1 ? '' : 's'} to ${DATA_FILE}`);
             }
@@ -216,7 +216,7 @@
             link.click();
             URL.revokeObjectURL(link.href);
 
-            flash('No edit server — downloaded a patched projects.json instead', true);
+            flash('No edit server, so downloaded a patched projects.json instead', true);
             commit(patches);
         } catch (error) {
             flash(`Save failed: ${error.message}`, true);
@@ -334,7 +334,7 @@
                 ui.dot.title = `Saving to ${info.file}`;
             })
             .catch(() => {
-                ui.dot.title = 'No edit server — Save will download a patched projects.json';
+                ui.dot.title = 'No edit server. Save will download a patched projects.json';
             });
     }
 

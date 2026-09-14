@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kevin Yuan — Embedded Hardware</title>
+    <title>Kevin Yuan / Embedded Hardware</title>
     <meta name="description" content="Kevin Yuan builds embedded hardware: PCB design, firmware, and the mechanical work around it. Computer engineering at the University of Michigan.">
     <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body id="top">
@@ -27,36 +27,6 @@
             </div>
         </div>
     </header>
-
-    <div class="container">
-        <section class="hero">
-            <div class="hero-main">
-                <p class="eyebrow">§00 — embedded hardware</p>
-                <h2 class="hero-title">
-                    Most of this was version
-                    <span class="circled">three<svg viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true"><path d="M 262,26 C 250,8 190,2 130,6 C 60,11 11,29 10,52 C 9,77 70,95 148,93 C 227,91 289,73 290,49 C 291,29 249,13 194,9"/></svg></span>.
-                </h2>
-                <p class="hero-lede">
-                    Schematic, layout, firmware, and usually the enclosure around it.
-                    The first board never works the way I drew it, which is why
-                    almost everything below has a <strong>V2</strong> and a <strong>V3</strong>.
-                </p>
-                <div class="hero-cta">
-                    <a href="#work" class="btn btn-solid">See the work ↓</a>
-                    <a href="resume.pdf" download class="btn">Résumé (PDF)</a>
-                    <a href="#" id="email-link-hero" class="btn">Copy my email</a>
-                </div>
-            </div>
-
-            <div class="spec">
-                <div class="spec-row"><span class="spec-key">Who</span><span class="spec-val">Kevin Yuan</span></div>
-                <div class="spec-row"><span class="spec-key">Studying</span><span class="spec-val">Computer Engineering, University of Michigan</span></div>
-                <div class="spec-row"><span class="spec-key">Does</span><span class="spec-val">PCB design · firmware · mechanical CAD</span></div>
-                <div class="spec-row"><span class="spec-key">Lately</span><span class="spec-val">Laminar '26 · Nupeak Robotics '25</span></div>
-                <div class="spec-row"><span class="spec-key">Bench</span><span class="spec-val">Altium · KiCad · SolidWorks · Zephyr · ROS</span></div>
-            </div>
-        </section>
-    </div>
 
     <!-- Full-bleed ticker. The list is duplicated so the loop is seamless. -->
     <div class="marquee" aria-hidden="true">
@@ -88,10 +58,17 @@
         </div>
     </div>
 
+    <!-- Second strip, tilted the other way and running in reverse, so the two
+         cross. Filled with the project titles from projects.json by js/app.js,
+         which also handles the duplication the seamless loop needs. -->
+    <div class="marquee marquee-alt" aria-hidden="true">
+        <div class="marquee-track" id="marquee-projects"></div>
+    </div>
+
     <div class="container">
         <section id="work" class="projects-section">
             <div class="section-head reveal">
-                <p class="eyebrow">§01 — selected work</p>
+                <p class="eyebrow">01 / selected work</p>
                 <h3 class="section-title">Boards, brackets, and the code that <span class="hl">argues</span> with them.</h3>
             </div>
             <div id="projects-container" class="projects-container">
@@ -111,12 +88,12 @@
                 <img src="images/profile.png" alt="Kevin Yuan">
             </div>
             <div class="about-content reveal">
-                <p class="eyebrow">§03 — about</p>
-                <h3>Who's actually typing.</h3>
-                <p>I'm Kevin. Computer engineering at Michigan, mostly pointed at robotics. I got here the boring way — I wanted a thing to exist, nobody was going to build it for me, so I learned KiCad.</p>
-                <p>Most of what's on this page started with someone saying <em>"can you make something that does X."</em> A handheld controller for teaching robot arms. A cockpit board for an electric race boat. An enclosure that survives a factory washdown. I usually take the whole thing — board, firmware, and the CAD — because handing a design off halfway is how you end up with a connector that doesn't fit.</p>
-                <p>Before any of it I made posters, which turned out to be the same job with different constraints.</p>
-                <p>If I'm not in the Robotics Building lab, try the poker room, the driving range, or the bouldering gym. Or just call.</p>
+                <p class="eyebrow">03 / about</p>
+                <h3>How I got here.</h3>
+                <p>I'm Kevin. Computer engineering at Michigan, mostly pointed at robotics. I picked up KiCad because I wanted a thing to exist and nobody else was going to build it.</p>
+                <p>Most of what's on this page started with someone saying <em>"can you make something that does X."</em> A handheld controller for teaching robot arms. A cockpit board for an electric race boat. An enclosure that survives a factory washdown. I usually take the board, the firmware, and the CAD together, because handing a design off halfway is how you end up with a connector that doesn't fit.</p>
+                <p>Before any of it I made posters for arts programs and Chinatown nonprofits in Vancouver. That work is further down the page.</p>
+                <p>If I'm not in the Robotics Building lab, try the poker room, the driving range, or the bouldering gym.</p>
 
                 <div class="skills-list">
                     <h4>What I reach for</h4>
@@ -127,10 +104,8 @@
                         <div>Fusion 360</div>
                         <div>C / C++</div>
                         <div>Zephyr RTOS</div>
-                        <div>Python</div>
                         <div>ROS Noetic</div>
                         <div>LTspice</div>
-                        <div>Rigid-flex layout</div>
                         <div>Scope &amp; bench work</div>
                         <div>Reflow &amp; rework</div>
                     </div>
@@ -139,7 +114,7 @@
         </section>
 
         <section id="contact" class="contact-section reveal">
-            <p class="eyebrow">§04 — contact</p>
+            <p class="eyebrow">04 / contact</p>
             <h3>Come say hi.</h3>
             <p class="contact-note">Email is the fastest way to reach me. I read all of it, and I answer quicker than my inbox suggests.</p>
             <div class="contact-links">
@@ -157,7 +132,7 @@
     </div>
 
     <!-- Toast notification -->
-    <div id="toast" class="toast">Email copied — talk soon</div>
+    <div id="toast" class="toast">Email copied</div>
 
     <!-- Inline content editor: localhost only, inert once deployed.
          Must load before the renderer so it can tag elements. -->

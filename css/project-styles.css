@@ -7,7 +7,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Header modifications for project pages — match the main page's floating bar.
+/* Header modifications for project pages, matching the main page's floating bar.
    Uses fixed (not sticky) so it overlays the full-bleed hero instead of pushing
    it down, while still floating at the same position as you scroll. */
 header {
@@ -431,7 +431,7 @@ header nav a:hover {
     border-radius: 2px;
 }
 
-/* Side-by-side layout — centered single column, caption beneath each image */
+/* Side-by-side layout: centered single column, caption beneath each image */
 .gallery-side-by-side {
     display: flex;
     flex-direction: column;
@@ -597,7 +597,7 @@ header nav a:hover {
     }
 }
 /* ==========================================================================
-   Bench-paper refresh — matches the home page.
+   Bench-paper refresh, matching the home page.
    Appended last so these win over the equivalent rules above.
    ========================================================================== */
 

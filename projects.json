@@ -1127,7 +1127,7 @@
         }
     ],
     "graphics": {
-        "eyebrow": "§02 — before the soldering iron",
+        "eyebrow": "02 / before the soldering iron",
         "heading": "I pushed pixels before I pushed copper.",
         "intro": "Posters and marks from high school, mostly for arts programs and Chinatown nonprofits around Vancouver. Same job as a board layout, honestly: fit everything inside one rectangle, make the important thing loud, and don't let two elements fight over the same space.",
         "items": [
@@ -1157,7 +1157,7 @@
                 "title": "Light Up Chinatown",
                 "year": "2022",
                 "meta": "Event poster · Youth Forum for Asian Representation × Chinatown Storytelling Centre",
-                "note": "A historical scavenger hunt through Vancouver's Chinatown. The White Rabbit candy is redrawn by hand — anyone who was handed one as a kid clocks it in about half a second, which was the entire idea.",
+                "note": "A historical scavenger hunt through Vancouver's Chinatown. The White Rabbit candy is redrawn by hand. Anyone who was handed one as a kid clocks it in about half a second, which was the entire idea.",
                 "src": "images/graphics/light-up-chinatown.jpg",
                 "alt": "Deep blue poster for the Light Up Chinatown historical scavenger hunt, with illustrated White Rabbit candies"
             },
@@ -1167,7 +1167,7 @@
                 "title": "Group 6 Show",
                 "year": "2022",
                 "meta": "Exhibition poster · Senior school arts show",
-                "note": "The grid is my classmates' actual work — film, music, theatre, visual art. The letterforms aren't printed over the top of it, they're punched through it, so the pieces spell out the show themselves.",
+                "note": "The grid is my classmates' actual work: film, music, theatre, visual art. The letterforms aren't printed over the top of it, they're punched through it, so the pieces spell out the show themselves.",
                 "src": "images/graphics/group-6-show.jpg",
                 "alt": "Exhibition poster made of a grid of student artwork with black cut-out letterforms"
             },

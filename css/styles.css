@@ -1,8 +1,10 @@
 /* ==========================================================================
-   Kevin Yuan — portfolio
+   Kevin Yuan portfolio
    Look: engineering bench paper. Graph grid underneath everything, silkscreen
    reference designators, mono annotations, hard offset shadows, and a few
    things deliberately sitting a degree or two off square.
+   Type is one family (IBM Plex) in three cuts, the way a datasheet sets type.
+   Accents are desk markers: highlighter over acid yellow, red for redlines.
    ========================================================================== */
 
 :root {
@@ -13,8 +15,8 @@
     --ink-soft: #615d55;
 
     /* Loud bits */
-    --pop: #ff3b1f;   /* marker red — hover states, counts, underlines */
-    --acid: #d9f24a;  /* highlighter — marquee, tape, emphasis */
+    --pop: #ff3b1f;   /* marker red: hover states, counts, the redline circle */
+    --acid: #d9f24a;  /* highlighter: marquee, tape, emphasis */
 
     /* Kept for css/project-styles.css, which renders the detail pages */
     --bg: var(--paper);
@@ -26,9 +28,9 @@
     --grid-line: rgba(19, 18, 16, 0.055);
     --grid-major: rgba(19, 18, 16, 0.085);
 
-    --font-display: 'Space Grotesk', 'Work Sans', sans-serif;
-    --font-mono: 'Space Mono', ui-monospace, 'SFMono-Regular', monospace;
-    --font-body: 'Work Sans', sans-serif;
+    --font-display: 'IBM Plex Sans Condensed', 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+    --font-body: 'IBM Plex Sans', sans-serif;
 }
 
 * {
@@ -88,7 +90,7 @@ body {
    Shared type utilities
    -------------------------------------------------------------------------- */
 
-/* Small mono label that sits above a heading, e.g. "§01 — selected work" */
+/* Small mono label that sits above a heading, e.g. "01 / selected work" */
 .eyebrow {
     font-family: var(--font-mono);
     font-size: 0.72rem;
@@ -109,7 +111,7 @@ body {
     opacity: 0.5;
 }
 
-/* Yellow highlighter swipe behind a word — sits under the text, not over it */
+/* Highlighter swipe behind a word. Sits under the text, not over it. */
 .hl {
     background: linear-gradient(var(--acid), var(--acid)) no-repeat;
     background-size: 100% 0.42em;
@@ -217,7 +219,7 @@ nav a:hover .nav-idx {
     opacity: 1;
 }
 
-/* Live local time — a small sign that a person is behind this */
+/* Live local time, a small sign that a person is behind this */
 .status {
     font-family: var(--font-mono);
     font-size: 0.7rem;
@@ -243,86 +245,6 @@ nav a:hover .nav-idx {
     0%   { box-shadow: 0 0 0 0 rgba(255, 59, 31, 0.55); }
     70%  { box-shadow: 0 0 0 8px rgba(255, 59, 31, 0); }
     100% { box-shadow: 0 0 0 0 rgba(255, 59, 31, 0); }
-}
-
-/* --------------------------------------------------------------------------
-   Hero
-   -------------------------------------------------------------------------- */
-
-.hero {
-    padding: 7rem 0 4rem;
-    display: grid;
-    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-    gap: 4rem;
-    align-items: end;
-}
-
-.hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(2.6rem, 6.4vw, 5.2rem);
-    font-weight: 700;
-    line-height: 0.96;
-    letter-spacing: -0.045em;
-    margin-bottom: 2rem;
-    text-wrap: balance;
-}
-
-.hero-title em {
-    font-style: italic;
-    font-weight: 500;
-}
-
-/* "three" gets a hand-drawn circle around it, like a redline on a drawing */
-.circled {
-    position: relative;
-    display: inline-block;
-    white-space: nowrap;
-}
-
-.circled svg {
-    position: absolute;
-    left: -5%;
-    top: -22%;
-    width: 116%;
-    height: 144%;
-    overflow: visible;
-    pointer-events: none;
-}
-
-.circled svg path {
-    fill: none;
-    stroke: var(--pop);
-    stroke-width: 5;
-    stroke-linecap: round;
-    stroke-dasharray: 1500;
-    stroke-dashoffset: 1500;
-}
-
-.circled.is-drawn svg path {
-    animation: draw-circle 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-}
-
-@keyframes draw-circle {
-    to { stroke-dashoffset: 0; }
-}
-
-.hero-lede {
-    font-size: 1.08rem;
-    color: var(--ink-soft);
-    max-width: 46ch;
-    line-height: 1.75;
-    margin-bottom: 2.25rem;
-}
-
-.hero-lede strong {
-    color: var(--ink);
-    font-weight: 500;
-}
-
-.hero-cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
 }
 
 /* Chunky bordered button with a hard offset shadow that snaps on hover */
@@ -363,50 +285,17 @@ nav a:hover .nav-idx {
     box-shadow: 6px 6px 0 var(--ink);
 }
 
-/* Spec-sheet block on the right of the hero */
-.spec {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    border-top: 1.5px solid var(--ink);
-    padding-top: 0.9rem;
-}
-
-.spec-row {
-    display: grid;
-    grid-template-columns: 5.5rem 1fr;
-    gap: 1rem;
-    padding: 0.55rem 0;
-    border-bottom: 1px dashed var(--border);
-    align-items: baseline;
-}
-
-.spec-row:last-child {
-    border-bottom: none;
-}
-
-.spec-key {
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.66rem;
-    color: var(--ink-soft);
-}
-
-.spec-val {
-    color: var(--ink);
-    line-height: 1.5;
-}
-
 /* --------------------------------------------------------------------------
-   Marquee — full-bleed acid strip
+   Marquee: full-bleed acid strip
    -------------------------------------------------------------------------- */
 
 .marquee {
-    margin: 3rem calc(-52vw + 50%) 7rem;
+    margin: 4.5rem calc(-52vw + 50%) 0;
     width: 104vw;
     overflow: hidden;
     background: var(--acid);
     border-block: 1.5px solid var(--ink);
-    transform: rotate(-0.7deg);
+    transform: rotate(-2.4deg);
 }
 
 .marquee-track {
@@ -437,6 +326,30 @@ nav a:hover .nav-idx {
 
 @keyframes marquee {
     to { transform: translateX(-50%); }
+}
+
+/* Second strip: inverted, tilted the other way, running in reverse. The two
+   cross near the middle of the viewport, which is the whole point. */
+.marquee-alt {
+    margin: -2.7rem calc(-52vw + 50%) 7rem;
+    background: var(--ink);
+    transform: rotate(2.6deg);
+    /* Reads as the strip lying on top of the other one, not colliding with it */
+    box-shadow: 0 8px 0 rgba(19, 18, 16, 0.1);
+}
+
+.marquee-alt .marquee-track {
+    animation-duration: 46s;
+    animation-direction: reverse;
+}
+
+.marquee-alt .marquee-item {
+    color: var(--paper);
+}
+
+.marquee-alt .marquee-item::after {
+    color: var(--acid);
+    opacity: 1;
 }
 
 /* --------------------------------------------------------------------------
@@ -660,7 +573,7 @@ nav a:hover .nav-idx {
 }
 
 /* --------------------------------------------------------------------------
-   Graphics design — full-bleed inverted band
+   Graphics design: full-bleed inverted band
    -------------------------------------------------------------------------- */
 
 .graphics-section {
@@ -831,7 +744,7 @@ nav a:hover .nav-idx {
     max-width: 48ch;
 }
 
-/* Poster lightbox (home page only — project pages have their own) */
+/* Poster lightbox (home page only; project pages have their own) */
 .gfx-lightbox {
     position: fixed;
     inset: 0;
@@ -1071,12 +984,6 @@ footer {
         display: none;
     }
 
-    .hero {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-        align-items: start;
-    }
-
     .graphics-grid {
         gap: 3.5rem 2rem;
     }
@@ -1106,16 +1013,13 @@ footer {
         font-size: 0.72rem;
     }
 
-    .hero {
-        padding: 4rem 0 2rem;
-    }
-
-    /* The headline wraps onto more lines down here, so it needs the leading */
-    .hero-title {
-        line-height: 1.04;
-    }
-
+    /* Too narrow for the two strips to cross, so stack them with a gap instead */
     .marquee {
+        margin-bottom: 0;
+    }
+
+    .marquee-alt {
+        margin-top: 1.5rem;
         margin-bottom: 5rem;
     }
 
@@ -1124,7 +1028,7 @@ footer {
         gap: 3.5rem;
     }
 
-    /* Tilt reads as a mistake at phone width — square everything up */
+    /* Tilt reads as a mistake at phone width, so square everything up */
     .project,
     .gfx,
     .about-image {
@@ -1184,10 +1088,6 @@ footer {
         opacity: 1;
         transform: none;
         transition: none;
-    }
-
-    .circled svg path {
-        stroke-dashoffset: 0;
     }
 
     .project,

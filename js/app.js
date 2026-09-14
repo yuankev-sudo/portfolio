@@ -2,8 +2,8 @@
 //
 // Everything visible here comes out of projects.json: the project cards under
 // "Selected Work" and the poster grid under "Graphics". The rest of the file is
-// the small stuff that gives the page its manner — scroll reveals, the drawn
-// circle in the headline, the clock in the header.
+// the small stuff that gives the page its manner: scroll reveals, the two
+// ticker strips, the clock in the header.
 
 // Order of categories shown on the home page
 const CATEGORY_ORDER = ['Electrical', 'Mechanical', 'Software'];
@@ -128,7 +128,7 @@ function renderGraphics(data) {
         <figure class="gfx reveal" style="--rot: ${GFX_TILTS[i % GFX_TILTS.length]}deg">
             <button class="gfx-frame" type="button"
                     data-full="${item.src}"
-                    data-caption="${item.title} — ${item.meta}">
+                    data-caption="${item.title} · ${item.meta}">
                 <img src="${item.src}" alt="${item.alt || item.title}" loading="lazy">
                 <span class="gfx-num">${item.designator || ''}</span>
                 <span class="gfx-zoom">Click to enlarge</span>
@@ -200,7 +200,7 @@ function setupEmailCopy() {
     const toast = document.getElementById('toast');
     const email = 'yuankev@umich.edu';
 
-    document.querySelectorAll('#email-link, #email-link-hero').forEach(link => {
+    document.querySelectorAll('#email-link').forEach(link => {
         link.addEventListener('click', e => {
             e.preventDefault();
             navigator.clipboard.writeText(email).then(() => {
@@ -257,29 +257,7 @@ function setupReveals() {
     });
 }
 
-// Draw the marker circle around "three" the first time it scrolls into view
-function setupCircle() {
-    const circled = document.querySelector('.circled');
-    if (!circled) return;
-
-    if (!('IntersectionObserver' in window)) {
-        circled.classList.add('is-drawn');
-        return;
-    }
-
-    const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            // Let the headline settle before the pen lands
-            setTimeout(() => entry.target.classList.add('is-drawn'), 450);
-            obs.unobserve(entry.target);
-        });
-    }, { threshold: 0.6 });
-
-    observer.observe(circled);
-}
-
-// Local time in the header — proof there's a person on the other end
+// Local time in the header, so there's a sign a person is behind this
 function setupClock() {
     const el = document.getElementById('local-time');
     if (!el) return;
@@ -291,7 +269,7 @@ function setupClock() {
             minute: '2-digit',
             hour12: false
         }).format(new Date());
-        el.textContent = `Ann Arbor, MI — ${time}`;
+        el.textContent = `Ann Arbor, MI · ${time}`;
     };
 
     tick();
@@ -301,7 +279,7 @@ function setupClock() {
 // Smooth-scroll to in-page anchors with a fast ease-in-out animation
 function setupSmoothScroll() {
     const HEADER_OFFSET = 96; // px of room above the target (matches scroll-margin-top)
-    const DURATION = 600;     // ms — fixed so it always feels fast
+    const DURATION = 600;     // ms, fixed so it always feels fast
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // easeInOutCubic: slow start, fast middle, slow end ("phase in / phase out")
@@ -340,6 +318,29 @@ function setupSmoothScroll() {
     });
 }
 
+// The black strip at the top of the page runs the project titles. Built here
+// rather than written into the HTML so it tracks projects.json.
+function renderProjectMarquee(data) {
+    const track = document.getElementById('marquee-projects');
+    if (!track) return;
+
+    const titles = data.projects.map(project => project.title).filter(Boolean);
+    if (!titles.length) return;
+
+    const pass = () => titles
+        .map(title => `<div class="marquee-item">${title}</div>`)
+        .join('');
+
+    // The loop animates the track by -50%, so one pass has to be at least a
+    // screen wide or a gap walks across on wide displays. Add passes until it
+    // is, then duplicate the lot so the seam lands off-screen.
+    track.innerHTML = pass();
+    for (let i = 0; i < 8 && track.scrollWidth < window.innerWidth; i++) {
+        track.insertAdjacentHTML('beforeend', pass());
+    }
+    track.innerHTML += track.innerHTML;
+}
+
 /* -------------------------------------------------------------------------- */
 
 async function loadContent() {
@@ -348,6 +349,7 @@ async function loadContent() {
         const data = await response.json();
         renderProjects(data);
         renderGraphics(data);
+        renderProjectMarquee(data);
     } catch (error) {
         console.error('Error loading content:', error);
     }
@@ -357,7 +359,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupStickyHeader();
     setupEmailCopy();
     setupClock();
-    setupCircle();
     setupGraphicsLightbox();
 
     // Reveals and anchor links have to wait for the rendered cards to exist
